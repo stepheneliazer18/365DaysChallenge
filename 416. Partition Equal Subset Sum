@@ -1,0 +1,29 @@
+class Solution {
+public:
+    bool canPartition(vector<int>& nums) {
+        int tot = 0;
+        for(auto &it: nums) tot+=it;
+        if(tot%2)return false;
+        
+        int sum = tot/2;
+        int n = nums.size();
+        
+        bool res[nums.size()+1][sum+1];
+        
+        for(int i=0;i<=n;i++){
+            for(int j=0;j<=sum;j++){
+                if(!i)res[i][j]=false;
+                if(!j)res[i][j]=true;
+            }
+        }
+        
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=sum;j++){
+                if(nums[i-1]<=j)res[i][j] = res[i-1][j-nums[i-1]] || res[i-1][j];
+                else res[i][j] = res[i-1][j];
+            }
+        }
+        
+        return res[n][sum];
+    }
+};
