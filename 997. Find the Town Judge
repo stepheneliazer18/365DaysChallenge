@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int findJudge(int n, vector<vector<int>>& trust) {
+        if(n==1) return n;
+        
+        map<int,int> mp;
+        map<int,int> newmp;
+        
+        for(auto &it: trust){
+            mp[it[0]]++;
+            newmp[it[1]]++;
+        }
+        for(auto &it: newmp){
+            if(it.second == n-1 && mp.find(it.first)==mp.end()) return it.first;
+        }
+        return -1;
+    }
+};
