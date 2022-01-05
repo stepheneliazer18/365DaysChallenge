@@ -1,0 +1,34 @@
+class Solution {
+public:
+    map<string,int> convert(string str)
+    {
+        map<string,int> mp;
+        string word = "";
+        for (int x=0;x<str.length();x++) {
+            if(str[x] >= 'a' && str[x] <= 'z' || str[x] >= 'A' && str[x] <= 'Z'){
+                word = word + str[x];
+            }
+            else if(word!=""){
+                transform(word.begin(), word.end(), word.begin(), ::tolower);
+                mp[word]++;
+                word = "";
+            }
+        }
+        transform(word.begin(), word.end(), word.begin(), ::tolower);
+        mp[word]++;
+        return mp;
+    }
+    string mostCommonWord(string paragraph, vector<string>& banned) {
+        map<string,int> mp = convert(paragraph);
+        int maxi = 0;
+        string ans = "";
+        for(auto &it: mp){
+            if(it.second>=maxi && find(banned.begin(), banned.end(), it.first)==banned.end()){
+                maxi = it.second;
+                ans = it.first;
+            }
+        }
+        return ans;
+        
+    }
+};
