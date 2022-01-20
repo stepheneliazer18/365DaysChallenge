@@ -3,7 +3,7 @@ public:
     string longestPalindrome(string s) {
         int n = s.length();
         if(n<=1) return s;
-        int start = 0 , max_len = 0;
+        int start =0 , end =0;
         
         for(int i=0;i<n;i++){
             int odd = expand(s,i,i);
@@ -11,15 +11,13 @@ public:
             
             int len = max(odd,even);
             
-            if(len > max_len){
+            if(len > end-start){
                 start = i - (len-1)/2;
-                max_len = len;
-                cout<<"start = "<<start<<endl;
-                cout<<"max_len = "<<max_len<<endl;
+                end = i + len/2;
             }
         }
 
-        return s.substr(start,max_len);
+        return s.substr(start,end-start+1);
     }
     
     //helper fucntion
