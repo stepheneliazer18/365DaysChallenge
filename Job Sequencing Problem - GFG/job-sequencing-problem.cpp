@@ -39,29 +39,27 @@ class Solution
             max_dead = max(max_dead,arr[i].dead);
         }
         vector<int> vec(max_dead+1,-1);
+        int cnt = 0;
+        int res = 0;
         for(int i=0;i<n;i++){
             int x = arr[i].dead;
             if(vec[x]!=-1){
                 while(x>0){
                     if(vec[x]==-1){
                         vec[x] = arr[i].profit;
+                        res+=vec[x];
+                        cnt++;
                         break;
                     }
                     x--;
                 }
             }
-            else vec[x] = arr[i].profit;
-        }
-        int res = 0;
-        int cnt = 0;
-        for(auto &it: vec){
-            // cout<<it<<" ";
-            if(it!=-1){
-                res+=it;
+            else{
+                vec[x] = arr[i].profit;
+                res+=vec[x];
                 cnt++;
             }
         }
-        // cout<<endl;
         vector<int> ans({cnt,res});
         return ans;
     } 
