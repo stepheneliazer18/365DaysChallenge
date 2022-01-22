@@ -43,21 +43,14 @@ class Solution
         int res = 0;
         for(int i=0;i<n;i++){
             int x = arr[i].dead;
-            if(vec[x]!=-1){
-                while(x>0){
-                    if(vec[x]==-1){
-                        vec[x] = arr[i].profit;
-                        res+=vec[x];
-                        cnt++;
-                        break;
-                    }
-                    x--;
+            while(x>0){
+                if(vec[x]==-1){
+                    vec[x] = arr[i].profit;
+                    res+=vec[x];
+                    cnt++;
+                    break;
                 }
-            }
-            else{
-                vec[x] = arr[i].profit;
-                res+=vec[x];
-                cnt++;
+                x--;
             }
         }
         vector<int> ans({cnt,res});
