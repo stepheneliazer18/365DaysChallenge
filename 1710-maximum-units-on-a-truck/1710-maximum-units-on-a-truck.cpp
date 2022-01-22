@@ -16,16 +16,9 @@ public:
         int n = boxTypes.size();
         int res = 0;
         for(int i=0;i<n;i++){
+            res += min(boxTypes[i][0],truckSize) * boxTypes[i][1];
+            truckSize -= boxTypes[i][0];
             if(truckSize<=0)break;
-            if(boxTypes[i][0]>truckSize){
-                res += truckSize * boxTypes[i][1];
-                truckSize = 0;
-                break;
-            }
-            else{
-                res += boxTypes[i][0] * boxTypes[i][1];
-                truckSize -= boxTypes[i][0];
-            }
         }
         return res;
     }
