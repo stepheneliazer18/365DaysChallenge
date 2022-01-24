@@ -8,9 +8,7 @@ public:
         transform(lower.begin(), lower.end(), lower.begin(), ::tolower);
         transform(title.begin(), title.end(), title.begin(), ::tolower);
         title[0] = toupper(title[0]);
-        if(upper == word) return true;
-        if(lower == word) return true;
-        if(title == word) return true;
+        if(upper == word || lower == word || title == word) return true;
         return false;
     }
 };
