@@ -22,12 +22,11 @@ public:
         temp->next = head;
         
         k = k%len;
-        k = len - k - 1;
+        k = len - k;
         
         cout<<"len = "<<len<<endl;
         cout<<"k = "<<k<<endl;
-        
-        temp = head;
+
         while(k--){
             temp = temp->next;
         }
