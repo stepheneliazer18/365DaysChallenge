@@ -9,7 +9,6 @@ public:
             if(arr[i-1]<arr[i] && arr[i]<arr[i+1] || arr[i-1]>arr[i] && arr[i]>arr[i+1])continue;
             else if(arr[i-1]==arr[i] || arr[i]==arr[i+1])return false;
             else if(arr[i-1]>arr[i] && arr[i]<arr[i+1]) return false;
-            else if(cnt>1) return false;
             else cnt++;
         }
         return cnt==1;
