@@ -22,7 +22,7 @@ public:
         for(l=0;l<n;l++) if(mini < nums[l]) break;
         for(r = n-1;r>=0;r--) if(maxi > nums[r]) break;
 
-        if(l>r) return 0;
+ 
         return r-l+1;
     }
 };
