@@ -5,41 +5,35 @@ using namespace std;
  // } Driver Code Ends
 class Solution {
 public:
-    bool helper(int node,vector<int>&color,vector<int>adj[])
-   {
-       queue<int>q;
-       q.push(node);
-       color[node]=1;
-       while(!q.empty())
-       {
-           int src=q.front();
-           q.pop();
-           for(auto it:adj[src])
-           {
-               if(color[it]==-1)
-               {
-                   color[it]=1-color[src];
-                   q.push(it);
-               }
-               else if(color[it]==color[src])
-               {
-                   return false;
-               }
-           }
-       }
-       return true;
-   }
-bool isBipartite(int v, vector<int>adj[]){
-    vector<int>color(v,-1);
-    for(int i=0;i<v;i++)
-    {
-        if(color[i]==-1)
-        {
-            if(!helper(i,color,adj))return false;
-        }
+    bool help(int i, vector<int> adj[], vector<int>& vis){
+	    queue<int> q;
+	    q.push(i);
+	    vis[i] = 1;
+	    while(!q.empty()){
+	        int node = q.front();
+	        q.pop();
+	        
+	        for(auto &it: adj[node]){
+	            if(vis[it] == -1){
+	                vis[it] = 1 - vis[node];
+	                q.push(it);
+	            }
+	            else if(vis[it] == vis[node]) return false;
+	        }
+	    }
+	    return true;
     }
-    return true;
-}
+	bool isBipartite(int V, vector<int>adj[]){
+	    vector<int> vis(V,-1);
+	    
+	    for(int i=0;i<V;i++){
+	        if(vis[i] == -1){
+	            if(!help(i,adj,vis)) return false;
+	        }
+	    }
+	    
+	    return true;
+	}
 
 };
 
