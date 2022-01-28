@@ -9,8 +9,6 @@ public:
             if(i!=0) lsum += nums[i-1];
             rsum -= nums[i];
             
-            cout<<lsum<<" == "<<rsum<<endl;
-            
             if(lsum == rsum) return i;
         }
         return -1;
