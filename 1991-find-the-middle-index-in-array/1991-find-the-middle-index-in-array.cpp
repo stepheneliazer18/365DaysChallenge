@@ -1,22 +1,16 @@
 class Solution {
 public:
     int findMiddleIndex(vector<int>& nums) {
+        int rsum = accumulate(nums.begin(),nums.end(),0);
         int n = nums.size();
         
+        int lsum = 0;
         for(int i=0;i<n;i++){
-            int lsum = 0;
-            int rsum = 0;
-            int l = i-1;
-            int r = i+1;
+            if(i!=0) lsum += nums[i-1];
+            rsum -= nums[i];
             
-            while(l>=0){
-                lsum+= nums[l];
-                l--;
-            }
-            while(r<n){
-                rsum += nums[r];
-                r++;
-            }
+            cout<<lsum<<" == "<<rsum<<endl;
+            
             if(lsum == rsum) return i;
         }
         return -1;
