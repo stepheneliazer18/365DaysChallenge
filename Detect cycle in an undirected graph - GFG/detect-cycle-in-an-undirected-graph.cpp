@@ -5,12 +5,43 @@ using namespace std;
  // } Driver Code Ends
 class Solution {
     public:
-    bool isCyclic(int i, vector<int> adj[], vector<bool> vis,int prev){
+    //                         DFS
+    // bool isCyclic(int i, vector<int> adj[], vector<bool> vis,int prev){
+    //     vis[i] = true;
+    //     bool flag = false;
+    //     for(auto &it: adj[i]){
+    //         if(!vis[it]) if(isCyclic(it,adj,vis,i)) return true; 
+    //         if(vis[it] && it!=prev) return true;
+    //     }
+    //     return false;
+    // }
+    // bool isCycle(int V, vector<int> adj[]) {
+    //     vector<bool> vis(V,false);
+        
+    //     for(int i=0;i<V;i++){
+    //         if(!vis[i]){
+    //             if(isCyclic(i,adj,vis,-1)) return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+    //                      BFS
+    bool isCyclic(int i, vector<int> adj[], vector<bool> vis){
+        queue<pair<int,int>> q;
+        q.push({i,-1});
         vis[i] = true;
-        bool flag = false;
-        for(auto &it: adj[i]){
-            if(!vis[it]) if(isCyclic(it,adj,vis,i)) return true; 
-            if(vis[it] && it!=prev) return true;
+        while(!q.empty()){
+            int node = q.front().first;
+            int prev = q.front().second;
+            q.pop();
+            
+            for(auto &it: adj[node]){
+                if(vis[it] && it!=prev) return true;
+                if(!vis[it]){
+                    q.push({it,node});
+                    vis[it] = true;
+                }
+            }
         }
         return false;
     }
@@ -19,7 +50,7 @@ class Solution {
         
         for(int i=0;i<V;i++){
             if(!vis[i]){
-                if(isCyclic(i,adj,vis,-1)) return true;
+                if(isCyclic(i,adj,vis)) return true;
             }
         }
         return false;
