@@ -7,33 +7,31 @@ class Solution
 {
 	public:
 	stack<int> st;
-	void dfs(int node, vector<int> adj[], vector<bool>& vis){
-	    vis[node] = true;
-	    for(auto &it: adj[node]){
-	        if(!vis[it]){
-	            vis[it] = true;
-	            dfs(it,adj,vis);
-	            
+	vector<int> bfs(vector<int> adj[], vector<int>& indegree){
+	    queue<int> q;
+	    vector<int> res;
+	    for(int i=0;i<indegree.size();i++) if(indegree[i]==0)q.push(i);
+	    
+	    while(!q.empty()){
+	        int node = q.front();
+	        res.push_back(node);
+	        q.pop();
+	        for(auto &it: adj[node]){
+	            indegree[it]-=1;
+	            if(indegree[it]==0)q.push(it);
 	        }
 	    }
-	    st.push(node);
+	    return res;
 	}
 	vector<int> topoSort(int V, vector<int> adj[]) 
 	{
-	    vector<bool> vis(V, false);
 	    
-	    
+	    vector<int> indegree(V,0);
 	    for(int i=0;i<V;i++){
-	        if(!vis[i]){
-	            dfs(i,adj,vis);
-	            
-	        }
+	        for(auto &it: adj[i])indegree[it]++;
 	    }
-	    vector<int> res;
-	    while(!st.empty()){
-	        res.push_back(st.top());
-	        st.pop();
-	    }
+
+	    vector<int> res = bfs(adj,indegree);
 	    return res;
 	}
 };
