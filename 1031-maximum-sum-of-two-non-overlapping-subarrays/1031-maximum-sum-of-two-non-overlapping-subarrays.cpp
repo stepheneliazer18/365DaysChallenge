@@ -10,7 +10,7 @@ public:
         for(int i=l;i<=l+len-1;i++) sum+=nums[i];
         return sum;
     }
-    int maxSumTwoNoOverlap(vector<int>& nums, int firstLen, int secondLen) {
+    int help(vector<int>&nums, int firstLen, int secondLen){
         int n = nums.size();
         
         vector<int> dp11(n,0);
@@ -29,29 +29,12 @@ public:
             dp12[i] = max(prev,cur_sum);
             prev = dp12[i];
         }
-        int ans1 = 0;
-        for(int i=0;i<n-1;i++) ans1 = max(ans1,dp11[i]+dp12[i+1]);
+        int ans = 0;
+        for(int i=0;i<n-1;i++) ans = max(ans,dp11[i]+dp12[i+1]);
+        return ans;
+    }
+    int maxSumTwoNoOverlap(vector<int>& nums, int x, int y) {
         
-        vector<int> dp21(n,0);
-        prev = 0;
-        for(int i=secondLen-1;i<n;i++){
-            int cur_sum = sumfor(i,secondLen,nums);
-            
-            dp21[i] = max(prev,cur_sum);
-            prev = dp21[i];
-        }
-        vector<int> dp22(n,0);
-        prev = 0;
-        for(int i=n-firstLen;i>=0;i--){
-            int cur_sum = sumback(i,firstLen,nums);
-            
-            dp22[i] = max(prev,cur_sum);
-            prev = dp22[i];
-        }
-        
-        int ans2 = 0;
-        for(int i=0;i<n-1;i++) ans2 = max(ans2,dp21[i]+dp22[i+1]);
-        
-        return max(ans1,ans2);
+        return max(help(nums,x,y),help(nums,y,x));
     }
 };
