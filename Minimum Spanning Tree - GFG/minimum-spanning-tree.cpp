@@ -10,30 +10,33 @@ class Solution
 	public:
     int spanningTree(int V, vector<vector<int>> adj[])
     {
-        vector<int> key(V,INT_MAX);
-        vector<bool> mst(V,false);
-        vector<int> parent(V,-1);
+        int key[V+1], parent[V+1];
+        bool mst[V+1];
+        
+        for(int i=0;i<=V;i++) key[i]=INT_MAX, mst[i]=false;
+        
+        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+        
         key[0] = 0;
-        for(int i=0;i<V;i++){
-            int mini=INT_MAX;
-            int node = 0;
-            for(int i=0;i<V;i++){
-                if(key[i]<mini && mst[i]==false){
-                    mini = key[i];
-                    node = i;
-                }
-            }
+        parent[0]=-1;
+        pq.push({0,0});
+        while(!pq.empty()){
+            int node = pq.top().second;
+            pq.pop();
             mst[node] = true;
-            for(auto &it: adj[node]){
+            for(auto it: adj[node]){
                 int v = it[0];
                 int wt = it[1];
                 if(mst[v]==false && wt<key[v]){
-                    key[v] = wt;
                     parent[v] = node;
+                    key[v] = wt;
+                    pq.push({key[v],v});
                 }
             }
         }
-        return accumulate(key.begin(),key.end(),0);
+        int res = 0;
+        for(int i=1;i<=V;i++)if(key[i]!=INT_MAX) res+=key[i];
+        return res;
     }
 };
 
