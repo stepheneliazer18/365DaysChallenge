@@ -8,7 +8,6 @@ using namespace std;
 class Solution
 {
 	public:
-	//Function to find sum of weights of edges of the Minimum Spanning Tree.
     int spanningTree(int V, vector<vector<int>> adj[])
     {
         vector<int> key(V,INT_MAX);
@@ -24,22 +23,17 @@ class Solution
                     node = i;
                 }
             }
-            if(mst[node]==false){
-                mst[node] = true;
-                for(auto &it: adj[node]){
-                    if(mst[it[0]]==false){
-                        int v = it[0];
-                        int wt = it[1];
-                        if(wt<key[v]){
-                            key[v] = wt;
-                            parent[v] = node;
-                        }
-                    }
+            mst[node] = true;
+            for(auto &it: adj[node]){
+                int v = it[0];
+                int wt = it[1];
+                if(mst[v]==false && wt<key[v]){
+                    key[v] = wt;
+                    parent[v] = node;
                 }
             }
         }
-        int ans = accumulate(key.begin(),key.end(),0);
-        return ans;
+        return accumulate(key.begin(),key.end(),0);
     }
 };
 
