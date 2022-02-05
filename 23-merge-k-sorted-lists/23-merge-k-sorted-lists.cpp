@@ -34,9 +34,8 @@ public:
             }
             if(flag) break;
             
-            res->next = new ListNode(min_val);
+            res = res->next = new ListNode(min_val);
             vec[ind] = vec[ind]->next;
-            res = res->next;
         }
         return temp->next;
     }
