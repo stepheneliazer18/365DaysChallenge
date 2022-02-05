@@ -1,6 +1,7 @@
 class Solution {
 public:
     void Merge(vector<int>& nums, int l, int mid, int r){
+        
         vector<int> left;
         vector<int> right;
         for(int i=l;i<=mid;i++) left.push_back(nums[i]);
@@ -9,25 +10,12 @@ public:
         int f = 0, s = 0;
         
         while(f<left.size() && s<right.size()){
-            if(left[f] < right[s]){
-                nums[l] = left[f];
-                f++;
-            }
-            else{
-                nums[l] = right[s];
-                s++;
-            }
-            l++;
+            if(left[f] < right[s]) nums[l++] = left[f++];
+            else nums[l++] = right[s++];
         } 
         
-        while(f<left.size()){
-            nums[l] = left[f];
-            l++;f++;
-        }
-        while(s<right.size()){
-            nums[l] = right[s];
-            s++;l++;
-        }
+        while(f<left.size()) nums[l++] = left[f++];
+        while(s<right.size()) nums[l++] = right[s++];
     }
     void mergeSort(vector<int>& nums, int l,int r){
         if(l<r){
