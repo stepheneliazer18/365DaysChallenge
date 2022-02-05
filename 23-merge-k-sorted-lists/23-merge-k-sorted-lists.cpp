@@ -23,7 +23,7 @@ public:
         
         while(1){
             int min_val = INT_MAX;
-            int ind = INT_MAX;
+            int ind;
             bool flag = true;
             for(int i=0;i<vec.size();i++){
                 if(vec[i]!=NULL && vec[i]->val < min_val){
