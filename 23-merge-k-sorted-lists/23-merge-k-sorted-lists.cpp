@@ -8,32 +8,57 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
-class cmp{
-    public:
-    bool operator()(ListNode* l1, ListNode* l2){
-        return l1->val > l2->val;
-    }
-};
 class Solution {
 public:
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        if(l1==NULL) return l2;
+        if(l2==NULL) return l1;
+
+        ListNode* res;
+
+        if(l1->val < l2->val){
+            res = l1;
+            res->next = mergeTwoLists(l1->next,l2);
+        }
+        else{
+            res = l2;
+            res->next = mergeTwoLists(l1,l2->next);
+        }
+        return res;
+    }
+    void mergeSort(ListNode* &head){
+        if(!head || !head->next) return;
+        
+        ListNode* slow = head;
+        ListNode* fast = head->next;
+        while(fast && fast->next){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        
+        ListNode* newhead = slow->next;        
+        slow->next = NULL;
+        
+        mergeSort(head);
+        mergeSort(newhead);
+        
+        head = mergeTwoLists(head,newhead);
+        
+    }
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         if(lists.size()==0) return NULL;
 
-        priority_queue<ListNode*, vector<ListNode*>, cmp> pq;
-        
-        for(int i=0;i<lists.size();i++){
-            if(lists[i]!=NULL) pq.push(lists[i]);
+        ListNode* head = new ListNode(-1);
+        ListNode* cur = head;
+        for(auto &it: lists){
+            ListNode* temp = it;
+            while(temp){
+                cur->next = temp;
+                cur = temp;
+                temp = temp->next;
+            }
         }
-        
-        ListNode* temp = new ListNode(100);
-        ListNode* res = temp;
-        while(!pq.empty()){
-            ListNode* node = pq.top(); 
-            temp->next = node;
-            temp = node;
-            pq.pop();
-            if(node->next)pq.push(node->next);
-        }
-        return res->next;
+        mergeSort(head->next);
+        return head->next;
     }
 };
