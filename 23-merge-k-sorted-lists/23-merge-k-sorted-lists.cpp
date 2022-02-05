@@ -9,29 +9,40 @@
  * };
  */
 
+ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+    if(l1==NULL) return l2;
+    if(l2==NULL) return l1;
+
+    ListNode* res;
+
+    if(l1->val < l2->val){
+        res = l1;
+        res->next = mergeTwoLists(l1->next,l2);
+    }
+    else{
+        res = l2;
+        res->next = mergeTwoLists(l1,l2->next);
+    }
+
+    return res;
+}
+
 class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         if(lists.size()==0) return NULL;
-        
-        vector<int> vec;
-        for(auto &it: lists){
-            ListNode* temp = it;
-            while(temp){
-                vec.push_back(temp->val);
-                temp = temp->next;
-            }
-        }
-        
-        sort(vec.begin(),vec.end());
-        
-        ListNode* temp = new ListNode(100);
-        ListNode* node = temp;
-        for(int i=0;i<vec.size();i++){
-            temp->next = new ListNode(vec[i]);
-            temp = temp->next;
-        }
 
-        return node->next;
+        ListNode* res = lists[0];
+        for(int i=1;i<lists.size();i++){
+            res = mergeTwoLists(res,lists[i]);
+        }
+        
+        return res;
     }
 };
+
+/*
+[[]]
+[[],[]]
+[]
+*/
