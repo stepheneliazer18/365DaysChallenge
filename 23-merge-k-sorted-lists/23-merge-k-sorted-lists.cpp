@@ -8,41 +8,36 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
-
-ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-    if(l1==NULL) return l2;
-    if(l2==NULL) return l1;
-
-    ListNode* res;
-
-    if(l1->val < l2->val){
-        res = l1;
-        res->next = mergeTwoLists(l1->next,l2);
-    }
-    else{
-        res = l2;
-        res->next = mergeTwoLists(l1,l2->next);
-    }
-
-    return res;
-}
-
 class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         if(lists.size()==0) return NULL;
 
-        ListNode* res = lists[0];
-        for(int i=1;i<lists.size();i++){
-            res = mergeTwoLists(res,lists[i]);
+        vector<ListNode*> vec;
+        for(auto &it: lists){
+            vec.push_back(it);
         }
         
-        return res;
+        ListNode* res = new ListNode(1000);
+        ListNode* temp = res;
+        
+        while(1){
+            int min_val = INT_MAX;
+            int ind = INT_MAX;
+            bool flag = true;
+            for(int i=0;i<vec.size();i++){
+                if(vec[i]!=NULL && vec[i]->val < min_val){
+                    min_val = vec[i]->val;
+                    ind = i;
+                    flag = false;
+                }
+            }
+            if(flag) break;
+            
+            res->next = new ListNode(min_val);
+            vec[ind] = vec[ind]->next;
+            res = res->next;
+        }
+        return temp->next;
     }
 };
-
-/*
-[[]]
-[[],[]]
-[]
-*/
