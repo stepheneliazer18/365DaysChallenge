@@ -27,8 +27,11 @@ public:
                 else if(nums[low]+nums[high] < c)low++;
                 else high--;
             }
-            i++;
-            while(i<n && nums[i]==nums[i-1]) i++;
+            prev = nums[i];
+            while(i<n && nums[i]==prev){
+                prev = nums[i];
+                i++;
+            }
         }
         return res;
     }
