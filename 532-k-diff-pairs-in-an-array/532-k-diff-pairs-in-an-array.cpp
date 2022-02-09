@@ -8,12 +8,7 @@ public:
         
         int cnt = 0;
         for(auto &it: mp){
-            if(mp.find(it.first+k) != mp.end()){
-                if(k==0){
-                    if(mp[it.first] > 1) cnt++;
-                }
-                else cnt++;
-            }
+            if((k && mp.find(it.first+k) != mp.end()) || (!k && mp[it.first] > 1))cnt++;
         }     
               
         return cnt;
