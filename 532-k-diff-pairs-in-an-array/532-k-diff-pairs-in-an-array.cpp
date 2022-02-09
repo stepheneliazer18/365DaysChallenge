@@ -13,7 +13,9 @@ public:
             if(c == k){
                 cnt++;
                 i++;j++;
+
                 while(j<n && nums[j]==nums[j-1]) j++;
+                while(i<j && nums[i]==nums[i-1]) i++;
             }
             else if(c < k) j++;
             else i++;
