@@ -26,18 +26,13 @@ public:
             while(l<=r){
                 mid = (l+r)/2;
                 if(nums[mid] == c){
-                    cout<<mid<<endl;
                     break;
                 }
                 else if(c < nums[mid]) r = mid-1;
                 else l = mid+1;
             }
-            if(nums[mid] == c){
-                cnt++;
-                low++;
-                while(low < n && nums[low] == nums[low-1]) low++;
-            }
-            else low++;
+            if(nums[mid] == c && low<n-1 && nums[low]!=nums[low+1]) cnt++;
+            low++;
         }
         return cnt;
     }
