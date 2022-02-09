@@ -2,18 +2,47 @@ class Solution {
 public:
     int findPairs(vector<int>& nums, int k) {
         int n = nums.size();
+        sort(nums.begin(),nums.end());
+        for(auto &it: nums) cout<<it<<" ";
+        cout<<endl;
+        int cnt = 0;
         
-        set<vector<int>> st;
-        
-        for(int i=0;i<n;i++){
-            for(int j = i+1;j<n;j++){
-                if(abs(nums[i]-nums[j]) == k){
-                    vector<int> temp {nums[i],nums[j]};
-                    sort(temp.begin(),temp.end());
-                    st.insert(temp);
+        if(k==0){
+            for(int i=0;i<n-1;i++){
+                if(nums[i]==nums[i+1]){
+                    cnt++;
+                    while(i<n-1 && nums[i]==nums[i+1]) i++;
                 }
             }
+            return cnt;
         }
-        return st.size();
+        
+        
+        int low = 0;
+        while(low<n){
+            int c = nums[low] + k;
+            cout<<"c = "<<c<<endl;
+            
+            int l = low+1;
+            int r = n-1;
+            
+            int mid;
+            while(l<=r){
+                mid = (l+r)/2;
+                if(nums[mid] == c){
+                    cout<<mid<<endl;
+                    break;
+                }
+                else if(c < nums[mid]) r = mid-1;
+                else l = mid+1;
+            }
+            if(nums[mid] == c){
+                cnt++;
+                low++;
+                while(low < n && nums[low] == nums[low-1]) low++;
+            }
+            else low++;
+        }
+        return cnt;
     }
 };
