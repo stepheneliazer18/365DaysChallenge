@@ -3,10 +3,7 @@ public:
     int findPairs(vector<int>& nums, int k) {
         int n = nums.size();
         sort(nums.begin(),nums.end());
-        for(auto &it: nums) cout<<it<<" ";
-        cout<<endl;
         int cnt = 0;
-        
         if(k==0){
             for(int i=0;i<n-1;i++){
                 if(nums[i]==nums[i+1]){
@@ -21,7 +18,6 @@ public:
         int low = 0;
         while(low<n){
             int c = nums[low] + k;
-            cout<<"c = "<<c<<endl;
             
             int l = low+1;
             int r = n-1;
