@@ -4,18 +4,7 @@ public:
         int n = nums.size();
         sort(nums.begin(),nums.end());
         
-        int cnt = 0;
-        // if(k==0){
-        //     for(int i=0;i<n-1;i++){
-        //         if(nums[i]==nums[i+1]){
-        //             cnt++;
-        //             while(i<n-1 && nums[i]==nums[i+1]) i++;
-        //         }
-        //     }
-        //     return cnt;
-        // }
-        
-        
+        int cnt = 0;       
         int i = 0;
         int j = i+1;
         
