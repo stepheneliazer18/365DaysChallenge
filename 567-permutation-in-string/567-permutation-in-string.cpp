@@ -17,7 +17,6 @@ public:
                 if(temp[s2[i]]<=mp[s2[i]]) cnt++;
             }
         }
-        cout<<"cnt = "<<cnt<<endl;
         if(cnt == m) return true;
         
         int l = 1;
