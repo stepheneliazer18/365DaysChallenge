@@ -11,18 +11,11 @@ public:
         map<char,int> temp;
         
         int cnt = 0;
-        for(int i=0;i<m;i++){
-            if(mp.find(s2[i]) != mp.end()){
-                temp[s2[i]]++;
-                if(temp[s2[i]]<=mp[s2[i]]) cnt++;
-            }
-        }
-        if(cnt == m) return true;
         
-        int l = 1;
-        int r = m;
+        int l = 0;
+        int r = 0;
         while(r<n){
-            if(mp.find(s2[l-1]) != mp.end()){
+            if(l>0 && mp.find(s2[l-1]) != mp.end()){
                 if(temp[s2[l-1]]<=mp[s2[l-1]]) cnt--;
                 temp[s2[l-1]]--;
             }
@@ -31,7 +24,8 @@ public:
                 if(temp[s2[r]]<=mp[s2[r]]) cnt++;
             }
             if(cnt == m)return true;
-            l++;r++;
+            r++;
+            if(r>=m) l++;
         }
         return false;
     }
