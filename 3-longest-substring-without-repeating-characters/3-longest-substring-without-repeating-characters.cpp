@@ -4,7 +4,7 @@ public:
         int n = s.length();
         if(n==0) return n;
         
-        set<char> st;
+        map<char,int> mp;
         
         int maxi = 0;
         
@@ -12,18 +12,10 @@ public:
         int r = 0;
         
         while(r<n){
-            
-            if(st.find(s[r]) == st.end()){
-                st.insert(s[r]);
-                maxi = max(maxi,r - l + 1);
-                r++;
-            }
-            else{
-                st.erase(s[l]);
-                l++;
-            }
-            
-            if(l>r) r++;
+            if(mp.find(s[r]) != mp.end()) l = max(mp[s[r]] + 1 ,l);
+            mp[s[r]] = r;
+            maxi = max(maxi, r-l+1);
+            r++;
         }
         return maxi;
     }
