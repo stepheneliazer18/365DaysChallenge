@@ -3,7 +3,6 @@ public:
     string removeKdigits(string nums, int k) {
         cout<<nums<<endl;
         int n = nums.length();
-        int need = n-k;
         
         stack<char> st;
         st.push(nums[0]);
@@ -18,7 +17,6 @@ public:
         while(!st.empty() && k--) st.pop();
         if(st.empty()) return "0";
 
-        
         while(!st.empty()){
             nums[n-1] = st.top();
             st.pop();
