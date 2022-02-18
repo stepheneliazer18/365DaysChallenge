@@ -1,7 +1,6 @@
 class Solution {
 public:
     string removeKdigits(string nums, int k) {
-        cout<<nums<<endl;
         int n = nums.length();
         
         stack<char> st;
