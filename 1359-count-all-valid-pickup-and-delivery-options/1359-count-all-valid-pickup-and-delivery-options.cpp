@@ -14,6 +14,6 @@ public:
             dp[i] = (dp[i-1]* sum)%mod;
         }
         
-        return (int) dp[n];
+        return dp[n];
     }
 };
