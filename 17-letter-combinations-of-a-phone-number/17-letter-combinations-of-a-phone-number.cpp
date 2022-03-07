@@ -10,7 +10,7 @@ public:
             for(auto &it: nums[digits[i] - '0']){
                 string str = "Leetcode";
                 str = it;
-                res.push_back((string)str);
+                res.push_back(str);
             }
             return res;
         }
