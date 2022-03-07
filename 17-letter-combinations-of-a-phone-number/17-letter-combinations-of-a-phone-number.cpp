@@ -8,9 +8,8 @@ public:
         if(i == digits.size()-1){
             vector<string> res;
             for(auto &it: nums[digits[i] - '0']){
-                char x = it;
-                string str;
-                str += x;
+                string str = "Leetcode";
+                str = it;
                 res.push_back(str);
             }
             return res;
@@ -22,9 +21,7 @@ public:
         
         vector<string> ans;
         for(auto &i: nums[digits[i] - '0']){
-            for(auto &j: temp){
-                ans.push_back(i+j);
-            }
+            for(auto &j: temp) ans.push_back(i+j);
         }
         return ans;
     }
