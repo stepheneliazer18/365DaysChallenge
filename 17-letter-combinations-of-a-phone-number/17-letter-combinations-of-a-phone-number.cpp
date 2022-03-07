@@ -19,7 +19,6 @@ public:
         cout<<digits[i]<<endl;
         
         vector<string> temp = help(digits,i+1);
-        for(auto &it: temp) cout<<it<<" ";cout<<endl;
         
         vector<string> ans;
         for(auto &i: nums[digits[i] - '0']){
