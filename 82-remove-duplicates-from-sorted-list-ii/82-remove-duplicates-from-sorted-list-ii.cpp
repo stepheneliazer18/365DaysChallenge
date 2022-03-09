@@ -23,10 +23,7 @@ public:
                 j = i;
                 if(!j->next) res->next = i;
                 else{
-                    while(j->val == j->next->val){
-                        j = j->next;
-                        if(!j->next) break;
-                    }
+                    while(j->next && j->val == j->next->val) j = j->next;
                 }
                 i = j->next;
             }
