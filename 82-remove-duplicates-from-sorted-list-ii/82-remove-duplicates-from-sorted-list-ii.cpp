@@ -21,10 +21,7 @@ public:
         while(i && j){
             if(i->next && i->next->val == i->val){
                 j = i;
-                if(!j->next) res->next = i;
-                else{
-                    while(j->next && j->val == j->next->val) j = j->next;
-                }
+                while(j->next && j->val == j->next->val) j = j->next;
                 i = j->next;
             }
             else{
