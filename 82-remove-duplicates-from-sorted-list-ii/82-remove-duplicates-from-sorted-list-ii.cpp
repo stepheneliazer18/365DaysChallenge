@@ -16,13 +16,11 @@ public:
         ListNode* dummy = new ListNode(-1);
         ListNode* res = dummy;
         ListNode* i = head;
-        ListNode* j = head;
         
-        while(i && j){
+        while(i){
             if(i->next && i->next->val == i->val){
-                j = i;
-                while(j->next && j->val == j->next->val) j = j->next;
-                i = j->next;
+                while(i->next && i->val == i->next->val) i = i->next;
+                i = i->next;
             }
             else{
                 res->next = new ListNode(i->val);
