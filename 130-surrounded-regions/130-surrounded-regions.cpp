@@ -4,7 +4,6 @@ public:
         if(i == arr.size() || j == arr[0].size() || i== -1 || j==-1 || arr[i][j] == 'X') return;
         else arr[i][j] = '1';
         if(vis[i][j] == true) return;
-        cout<<i<<" "<<j<<endl;
         
         vis[i][j] = true;
         
@@ -28,10 +27,6 @@ public:
                     }
                 }
             }
-        }
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++) cout<<board[i][j]<<" ";
-            cout<<endl;
         }
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
