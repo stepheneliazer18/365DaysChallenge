@@ -1,44 +1,42 @@
 class Solution {
 public:
-    void capture(int i,int j,vector<vector<char>>& arr){
-        if(i == arr.size() || j == arr[0].size() || arr[i][j] == 'X') return;
-        else arr[i][j] = 'X';
-        
-        capture(i+1,j,arr);
-        capture(i,j+1,arr);
-        capture(i-1,j,arr);
-        capture(i,j-1,arr);
-        return;
-    }
-    bool help(int i,int j,vector<vector<char>>& arr,vector<vector<bool>>& vis){
-        if(vis[i][j] == true || arr[i][j] == 'X') return true;
-        if(i==arr.size()-1 || j==arr[0].size()-1 || i == 0 || j==0){
-            if(arr[i][j] == 'O') return false;
-            return true;
-        }
+    void capture(int i,int j,vector<vector<char>>& arr,vector<vector<bool>>& vis){
+        if(i == arr.size() || j == arr[0].size() || i== -1 || j==-1 || arr[i][j] == 'X') return;
+        else arr[i][j] = '1';
+        if(vis[i][j] == true) return;
+        cout<<i<<" "<<j<<endl;
         
         vis[i][j] = true;
         
-        bool right,left,down,up;
-        right = help(i+1,j,arr,vis);
-        down = help(i,j+1,arr,vis);
-        left = help(i-1,j,arr,vis);
-        up = help(i,j-1,arr,vis);
-        return right && down && left && up;
+        capture(i+1,j,arr,vis);
+        capture(i,j+1,arr,vis);
+        capture(i-1,j,arr,vis);
+        capture(i,j-1,arr,vis);
+        return;
     }
+    
     void solve(vector<vector<char>>& board) {
         int m = board.size();
         int n = board[0].size();
         
         vector<vector<bool>> vis(m,vector<bool>(n,false));
-        for(int i=1;i<m-1;i++){
-            for(int j=1;j<n-1;j++){
-                if(board[i][j] == 'X') continue;
-                else {
-                    if(vis[i][j] == false && help(i,j,board,vis)){
-                        capture(i,j,board);
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(i==0 || j==0 || i==m-1 || j==n-1){
+                    if(board[i][j] == 'O'){
+                        capture(i,j,board,vis);
                     }
                 }
+            }
+        }
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++) cout<<board[i][j]<<" ";
+            cout<<endl;
+        }
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(board[i][j] == 'O') board[i][j] = 'X';
+                if(board[i][j] == '1') board[i][j] = 'O';
             }
         }
     }
