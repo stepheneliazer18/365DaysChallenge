@@ -1,13 +1,13 @@
 class Solution {
 public:
-    void capture(int i,int j,vector<vector<char>>& arr,int d){
+    void capture(int i,int j,vector<vector<char>>& arr){
         if(i == arr.size() || j == arr[0].size() || arr[i][j] == 'X') return;
         else arr[i][j] = 'X';
         
-        if(d != 3 ) capture(i+1,j,arr,1);
-        if(d != 4 ) capture(i,j+1,arr,2);
-        if(d != 1 ) capture(i-1,j,arr,3);
-        if(d != 2 ) capture(i,j-1,arr,4);
+        capture(i+1,j,arr);
+        capture(i,j+1,arr);
+        capture(i-1,j,arr);
+        capture(i,j-1,arr);
         return;
     }
     bool help(int i,int j,vector<vector<char>>& arr,int d,vector<vector<bool>>& vis){
@@ -21,10 +21,10 @@ public:
         
         bool right,left,down,up;
         right = left = down = up = true;
-        if(d != 3 ) right = help(i+1,j,arr,1,vis);
-        if(d != 4 ) down = help(i,j+1,arr,2,vis);
-        if(d != 1 ) left = help(i-1,j,arr,3,vis);
-        if(d != 2 ) up = help(i,j-1,arr,4,vis);
+        right = help(i+1,j,arr,1,vis);
+        down = help(i,j+1,arr,2,vis);
+        left = help(i-1,j,arr,3,vis);
+        up = help(i,j-1,arr,4,vis);
         return right && down && left && up;
     }
     void solve(vector<vector<char>>& board) {
@@ -37,7 +37,7 @@ public:
                 if(board[i][j] == 'X') continue;
                 else {
                     if(vis[i][j] == false && help(i,j,board,0,vis)){
-                        capture(i,j,board,0);
+                        capture(i,j,board);
                     }
                 }
             }
