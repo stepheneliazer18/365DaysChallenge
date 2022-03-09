@@ -18,7 +18,6 @@ public:
         }
         
         vis[i][j] = true;
-        cout<<i<<" "<<j<<endl;
         
         bool right,left,down,up;
         right = left = down = up = true;
@@ -37,12 +36,7 @@ public:
             for(int j=1;j<n-1;j++){
                 if(board[i][j] == 'X') continue;
                 else {
-                    cout<<"before: "<<endl;
-                    cout<<"i = "<<i<<" j = "<<j<<endl;
                     if(vis[i][j] == false && help(i,j,board,0,vis)){
-                        cout<<"after: "<<endl;
-                        cout<<"i = "<<i<<" j = "<<j<<endl;
-                        cout<<board[i][j]<<endl;
                         capture(i,j,board,0);
                     }
                 }
@@ -50,7 +44,3 @@ public:
         }
     }
 };
-
-// [["X","X","X","X"],["X","O","O","X"],["X","X","O","X"],["X","O","X","X"]]
-// [["X","X","X","X","X"],["X","O","O","O","X"],["X","X","O","O","X"],["X","X","X","O","X"],["X","O","X","X","X"]]
-//[["X","X","X","X","X","X","X","X","X"],["X","O","O","X","O","O","O","O","X"],["X","X","O","X","O","O","O","O","X"],["X","O","O","O","X","O","O","O","X"],["X","O","O","O","O","O","O","O","X"],["X","X","O","O","X","O","X","O","X"],["X","O","O","X","O","O","O","O","X"],["X","O","O","X","O","O","O","O","X"],["X","X","X","X","X","X","X","X","X"]]
