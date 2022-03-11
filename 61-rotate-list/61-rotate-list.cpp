@@ -23,9 +23,6 @@ public:
         
         k = k%len;
         k = len - k;
-        
-        cout<<"len = "<<len<<endl;
-        cout<<"k = "<<k<<endl;
 
         while(k--){
             temp = temp->next;
