@@ -11,7 +11,7 @@ class Solution:
             
             if(dic.get(pattern[i],0) == 0):
                 print(n, n in dic.values())
-                if not (n in dic.values()):
+                if (n in dic.values()) == False:
                     dic[pattern[i]] = n
                     print("in")
                     fic[n] = pattern[i]
