@@ -19,7 +19,6 @@ public:
             }
             else return false;
         }
-        if(st.empty()) return true;
-        return false;
+        return true;
     }
 };
