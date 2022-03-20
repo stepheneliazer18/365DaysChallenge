@@ -10,12 +10,7 @@ class Solution {
         
         long long x = n & (n-1);
         if(!x){
-            int i=0;
-            while(n){
-                n >>= 1;
-                i++;
-            }
-            return i;
+            return log2(n)+1;
         }
         else return -1;
     }
