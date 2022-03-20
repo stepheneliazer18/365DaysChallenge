@@ -14,7 +14,8 @@ class Solution{
     bool isPowerofTwo(long long n){
         
         if(n==0) return false;
-        return ceil(log2(n)) == floor(log2(n)) ;
+        long long x = n&(n-1);
+        return x==0;
     }
 };
 
