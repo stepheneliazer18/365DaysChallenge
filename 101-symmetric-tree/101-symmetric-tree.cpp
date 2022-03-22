@@ -11,22 +11,14 @@
  */
 class Solution {
 public:
-    
-    bool inorder(TreeNode* l, TreeNode* r){
-        if(!r && !l) return true;
-        if(!r) return false;
-        if(!l) return false;
-        
-        if(r->val != l->val) return false;
-        
-        bool le = inorder(l->left,r->right);
-        bool re = inorder(r->left,l->right);
-        
-        return le && re;
-        
+    bool solve(TreeNode* p,TreeNode* q){
+        if(p==NULL || q==NULL) return p==q;
+
+        return p->val==q->val
+        && solve(p->left,q->right)
+        && solve(p->right,q->left);
     }
-    
     bool isSymmetric(TreeNode* root) {
-        return inorder(root->left, root->right);
+        return solve(root->left,root->right);
     }
 };
