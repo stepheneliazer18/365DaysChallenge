@@ -12,10 +12,6 @@ public:
     }
     int numIslands(vector<vector<char>>& grid) {
         int cnt = 0;
-        for(auto &it: grid){
-            for(auto &it1: it) cout<<it1<<" ";
-            cout<<endl;
-        }
         for(int i=0;i<grid.size();i++){
             for(int j=0;j<grid[0].size();j++){
                 cout<<i<<" "<<j<<endl;
