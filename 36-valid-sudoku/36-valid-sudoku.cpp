@@ -13,10 +13,6 @@ public:
     }
     bool isValidSudoku(vector<vector<char>>& board) {
         
-        for(auto &it: board){
-            for(auto &it1: it) cout<<it1<<" ";cout<<endl;
-        }
-        
         vector<vector<int>> vec(10,vector<int>(10,0));
         
         for(int i=0;i<9;i+=3){
@@ -26,20 +22,11 @@ public:
                         for(int y=j;y<j+3;y++){
                             for(int a=0;a<9;a++){
                                 if(a==y || board[x][a]=='.') continue;
-                                if(board[x][y] == board[x][a]){
-                                    cout<<x<<y<<endl;
-                                    cout<<x<<a<<endl;
-                                    return false;
-                                }
+                                if(board[x][y] == board[x][a])return false;
                             }
                             for(int a=0;a<9;a++){
                                 if(a==x || board[a][y]=='.') continue;
-                                if(board[x][y] == board[a][y]){
-                                    cout<<"hey"<<endl;
-                                    cout<<x<<y<<endl;
-                                    cout<<a<<y<<endl;
-                                    return false;
-                                } 
+                                if(board[x][y] == board[a][y])return false;
                             }
                         }
                     }
@@ -50,9 +37,3 @@ public:
         return true;
     }
 };
-
-/*
-
-[["8","3",".",".","7",".",".",".","."],["6",".",".","1","9","5",".",".","."],[".","9","8",".",".",".",".","6","."],["8",".",".",".","6",".",".",".","3"],["4",".",".","8",".","3",".",".","1"],["7",".",".",".","2",".",".",".","6"],[".","6",".",".",".",".","2","8","."],[".",".",".","4","1","9",".",".","5"],[".",".",".",".","8",".",".","7","9"]]
-
-*/
