@@ -16,6 +16,5 @@ public:
             else left = mid+1;
         }
         return false;
-        
     }
 };
