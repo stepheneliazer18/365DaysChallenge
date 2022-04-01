@@ -16,7 +16,7 @@ public:
                     break;
                 }
             }
-            if(j==temp+1) ans = j-1;
+            ans = j-1;
         }
         if(ans == -1) return "";
         return cmn.substr(0,ans+1);
