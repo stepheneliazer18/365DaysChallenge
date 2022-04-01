@@ -14,17 +14,17 @@ using namespace std;
 
 class Solution{
 public:
-    int counter = 2;
+    int cnt = 2;
     bool isLucky(int n){
-        if(counter > n)
+        if(cnt > n)
             return 1;
-        if(n % counter == 0)
+        if(n % cnt == 0)
             return 0;
 
-        int next_position = n - (n/counter);
+        n = n - (n/cnt);
          
-        counter++;
-        return isLucky(next_position);
+        cnt++;
+        return isLucky(n);
     }
 };
 
