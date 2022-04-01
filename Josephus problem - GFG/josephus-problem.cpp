@@ -10,29 +10,23 @@ using namespace std;
 class Solution
 {
     public:
+    void fun(vector<int>& vec, int i, int &ans, int k){
+        if(vec.size()==1){
+            ans = vec[0];
+            return;
+        }
+        i = (i+k-1)%vec.size();
+        vec.erase(vec.begin()+i);
+        fun(vec,i,ans,k);
+    }
     int josephus(int n, int k){
        vector<int> vec;
+       int ans = -1;
        for(int i=1;i<=n;i++) vec.push_back(i);
        
-       int len = n;
-       int i=0;
-       int cnt = 1;
-       while(len>1){
-           if(vec[i]!=-1){
-               if(cnt == k){
-                   vec[i] = -1;
-                   len--;
-                   cnt = 1;
-                   
-               }
-               else cnt++;
-           }
-           i = (i+1)%n;
-       }
-       for(int i=0;i<n;i++){
-           if(vec[i]!=-1) return i+1;
-       }
-       return 1;
+       fun(vec,0,ans,k);
+       
+       return ans;
     }
 };
 
