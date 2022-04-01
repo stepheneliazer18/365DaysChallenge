@@ -11,10 +11,7 @@ public:
             int temp = min(len-1, ans);
             int j;
             for(j=0;j<=temp;j++){
-                if(cmn[j] != strs[i][j]){
-                    ans = j-1;
-                    break;
-                }
+                if(cmn[j] != strs[i][j]) break;
             }
             ans = j-1;
         }
