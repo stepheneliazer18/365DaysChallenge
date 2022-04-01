@@ -15,11 +15,11 @@ class Solution
         vector<int> dp(n+1,1);
         dp[0] = 0;
         for(int i=1;i<=n;i++){
-            int ans = INT_MIN;
+            int ans = -1;
             if(i-a > -1) ans = max(ans,dp[i-a]);
             if(i-b > -1) ans = max(ans,dp[i-b]);
             if(i-c > -1) ans = max(ans,dp[i-c]);
-            if(ans != INT_MIN && ans!=-1) dp[i] = ans + 1;
+            if(ans!=-1) dp[i] = ans + 1;
             else dp[i] = -1;
         }
         if(dp[n] == -1) return 0;
