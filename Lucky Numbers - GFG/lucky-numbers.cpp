@@ -15,9 +15,7 @@ using namespace std;
 class Solution{
 public:
     int counter = 2;
-    bool fun(int n){
-        
-     
+    bool isLucky(int n){
         if(counter > n)
             return 1;
         if(n % counter == 0)
@@ -27,9 +25,6 @@ public:
          
         counter++;
         return isLucky(next_position);
-    }
-    bool isLucky(int n){
-        return fun(n);
     }
 };
 
