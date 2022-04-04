@@ -16,13 +16,10 @@ public:
         ListNode* temp = head;
         ListNode* first;
         while(temp){
-            if(n == k){
-                first = temp;
-            }
+            if(n == k) first = temp;
             temp = temp->next;
             n++;
         }
-        cout<<first->val<<endl;
         
         int req = n-k;
         int cnt = 1;
@@ -31,10 +28,7 @@ public:
             second = second->next;
             cnt++;
         }
-        cout<<second->val<<endl;
-        int value = first->val;
-        first->val = second->val;
-        second->val = value;
+        swap(first->val,second->val);
         return head;
     }
 };
