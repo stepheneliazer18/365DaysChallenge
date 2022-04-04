@@ -21,12 +21,11 @@ public:
             n++;
         }
         
-        int req = n-k;
-        int cnt = 1;
+        ListNode* fast = first;
         ListNode* second = head;
-        while(cnt != req){
+        while(fast->next){
             second = second->next;
-            cnt++;
+            fast = fast->next;
         }
         swap(first->val,second->val);
         return head;
