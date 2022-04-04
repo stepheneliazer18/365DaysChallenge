@@ -10,15 +10,12 @@
  */
 class Solution {
 public:
-    ListNode* swapNodes(ListNode* head, int k) {
-        int n = 1;
+    ListNode* swapNodes(ListNode* head, int k) {        
+        ListNode* first = head;
         
-        ListNode* temp = head;
-        ListNode* first;
-        while(temp){
-            if(n == k) first = temp;
-            temp = temp->next;
-            n++;
+        while(k>1){
+            first = first->next;
+            k--;
         }
         
         ListNode* fast = first;
