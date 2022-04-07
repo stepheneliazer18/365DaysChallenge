@@ -9,13 +9,6 @@ public:
             if(pq.size() == 1){
                 return pq.top();
             }
-            if(pq.size() == 2){
-                int n1 = pq.top();
-                pq.pop();
-                int n2 = pq.top();
-                pq.pop();
-                return abs(n1-n2);
-            }
             int n1 = pq.top();
             pq.pop();
             int n2 = pq.top();
