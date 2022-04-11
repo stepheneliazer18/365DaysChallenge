@@ -4,16 +4,11 @@ class Solution:
         for i in grid:
             for j in i:
                 l.append(j)
-        print(l)
-        
+                
         k = k % len(l)
         
-        print(len(l)-k)
-        
         l = l[-k:] + l[:-k]
-        
-        print(l)
-        
+                
         ans = []
         x = 0
         for i in range(len(grid)):
