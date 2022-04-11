@@ -10,7 +10,7 @@ class Solution:
         
         print(len(l)-k)
         
-        l = l[len(l)-k:] + l[:len(l)-k]
+        l = l[-k:] + l[:-k]
         
         print(l)
         
