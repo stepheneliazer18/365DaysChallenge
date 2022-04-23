@@ -13,7 +13,6 @@ public:
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
                 if(matrix[i][j] == 0){
-                    cout<<i<<" "<<j<<endl;
                     makeItZero(i,j,temp);
                 }
             }
