@@ -2,19 +2,22 @@ class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
         int n = nums.size();
-        
-        int i;
-        for(i=n-2;i>=0;i--){
-            if(nums[i] < nums[i+1]) break;
-        }
-        int x = i;
-        if(i!=-1){
-            for(i=n-1;i>=0;i--){
-                if(nums[i] > nums[x]) break;
+        int i,j;
+        for(i=n-1;i>0;i--){
+            if(nums[i] > nums[i-1]){
+                break;
             }
-            swap(nums[i],nums[x]);
         }
-        sort(nums.begin()+x+1,nums.end());
-
+        if(i==0){
+            reverse(nums.begin(),nums.end());
+            return;
+        }
+        i--;
+        for(j=n-1;j>0;j--){
+            if(nums[j] > nums[i]) break;
+        }
+        cout<<nums[i]<<" "<<nums[j]<<endl;
+        swap(nums[i],nums[j]);
+        sort(nums.begin()+i+1,nums.end());
     }
 };
