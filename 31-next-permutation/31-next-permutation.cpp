@@ -16,7 +16,6 @@ public:
         for(j=n-1;j>0;j--){
             if(nums[j] > nums[i]) break;
         }
-        cout<<nums[i]<<" "<<nums[j]<<endl;
         swap(nums[i],nums[j]);
         sort(nums.begin()+i+1,nums.end());
     }
