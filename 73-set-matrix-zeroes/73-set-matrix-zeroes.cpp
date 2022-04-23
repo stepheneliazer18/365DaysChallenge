@@ -18,6 +18,7 @@ public:
                 }                
             }
         }
+        
         for(int i=m-1;i>=0;i--){
             for(int j=n-1;j>=0;j--){
                 if(i==0 && rowBool) matrix[i][j] = 0;
