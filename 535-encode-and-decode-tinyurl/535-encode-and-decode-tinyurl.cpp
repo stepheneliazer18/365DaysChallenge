@@ -8,7 +8,6 @@ public:
             res += c[rand() % 62];
      return "http://tinyUrl.com/"+res;
     }
-    // Encodes a URL to a shortened URL.
     string encode(string longUrl) {
         if(ls.count(longUrl)) return ls[longUrl];
         string cod = tinyCode();
@@ -18,13 +17,7 @@ public:
      return cod;
     }
 
-    // Decodes a shortened URL to its original URL.
     string decode(string shortUrl) {
         return sl[shortUrl];
     }
 };
-/*
-if(find helpful) {
- do upvote(); // thanks:)
- }
- */
