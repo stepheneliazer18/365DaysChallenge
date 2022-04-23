@@ -12,11 +12,10 @@ public:
             reverse(nums.begin(),nums.end());
             return;
         }
-        i--;
         for(j=n-1;j>0;j--){
-            if(nums[j] > nums[i]) break;
+            if(nums[j] > nums[i-1]) break;
         }
-        swap(nums[i],nums[j]);
-        sort(nums.begin()+i+1,nums.end());
+        swap(nums[i-1],nums[j]);
+        sort(nums.begin()+i,nums.end());
     }
 };
