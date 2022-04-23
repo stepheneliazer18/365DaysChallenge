@@ -8,14 +8,12 @@ public:
                 break;
             }
         }
-        if(i==0){
-            reverse(nums.begin(),nums.end());
-            return;
+        if(i>0){
+            for(j=n-1;j>0;j--){
+                if(nums[j] > nums[i-1]) break;
+            }
+            swap(nums[i-1],nums[j]);
         }
-        for(j=n-1;j>0;j--){
-            if(nums[j] > nums[i-1]) break;
-        }
-        swap(nums[i-1],nums[j]);
         reverse(nums.begin()+i,nums.end());
     }
 };
