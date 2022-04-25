@@ -6,20 +6,14 @@ public:
         
         vector<vector<int>> vec;
         
-        int start = intervals[0][0];
-        int end = intervals[0][1];
-        
-        for(int i=1;i<n;i++){
-            if(end >= intervals[i][0]){
-                end = max(end,intervals[i][1]);
+        for(int i=0;i<n;i++){
+            if(vec.empty() || vec.back()[1] < intervals[i][0]){
+                vec.push_back({intervals[i][0],intervals[i][1]});
             }
             else{
-                vec.push_back({start,end});
-                start = intervals[i][0];
-                end = intervals[i][1];
+                vec.back()[1] = max(vec.back()[1],intervals[i][1]);
             }
         }
-        vec.push_back({start,end});
         return vec;
     }
 };
