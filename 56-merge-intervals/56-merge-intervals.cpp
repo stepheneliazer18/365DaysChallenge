@@ -11,8 +11,7 @@ public:
         
         for(int i=1;i<n;i++){
             if(end >= intervals[i][0]){
-                if(end >= intervals[i][1]) continue;
-                else end = intervals[i][1];
+                end = max(end,intervals[i][1]);
             }
             else{
                 vec.push_back({start,end});
