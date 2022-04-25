@@ -2,23 +2,25 @@ class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
         sort(intervals.begin(),intervals.end());
-        stack<vector<int>> stack;
-        stack.push(intervals[0]);
-        for(int i=1;i<intervals.size();i++){
-            vector<int> temp = stack.top();
-            if(intervals[i][0] <= temp[1] && intervals[i][1] <= temp[1]) continue;
-            if(intervals[i][0] <= temp[1]){
-                stack.pop();
-                stack.push({temp[0],intervals[i][1]});
+        int n = intervals.size();
+        
+        vector<vector<int>> vec;
+        
+        int start = intervals[0][0];
+        int end = intervals[0][1];
+        
+        for(int i=1;i<n;i++){
+            if(end >= intervals[i][0]){
+                if(end >= intervals[i][1]) continue;
+                else end = intervals[i][1];
             }
-            else stack.push(intervals[i]);
+            else{
+                vec.push_back({start,end});
+                start = intervals[i][0];
+                end = intervals[i][1];
+            }
         }
-        vector<vector<int>> res;
-        while (!stack.empty()) {
-            res.push_back(stack.top());
-            stack.pop();
-        }
-        reverse(res.begin(),res.end());
-        return res;
+        vec.push_back({start,end});
+        return vec;
     }
 };
