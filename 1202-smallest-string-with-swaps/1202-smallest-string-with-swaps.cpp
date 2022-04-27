@@ -35,12 +35,13 @@ public:
             
             if(u != v) makeUnion(parent,rank,u,v);
         }
+        
         unordered_map<int,vector<int>> mp;
         
         for(int i=0;i<n;i++) mp[findPar(parent, i)].push_back(i);
         
         for(auto &it: mp){
-            string temp = "";
+            string temp;
             for(auto &it1: it.second) temp.push_back(s[it1]);
             sort(temp.begin(),temp.end());
             int x = 0;
