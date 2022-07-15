@@ -22,9 +22,24 @@ public:
         if(wt[ind] <= w) pick = val[ind] + solve(ind,w-wt[ind],wt,val,dp);
         return dp[ind][w] = max(not_pick,pick);
     }
-    int knapSack(int n, int w, int val[], int wt[]){
-        vector<vector<int>> dp(n, vector<int>(w+1,-1));
-        return solve(n-1,w,wt,val,dp);
+    int knapSack(int n, int W, int val[], int wt[]){
+        vector<vector<int>> dp(n, vector<int>(W+1,-1));
+        // return solve(n-1,W,wt,val,dp);
+        
+        for(int w=0;w<=W;w++){
+            dp[0][w] = (w/wt[0]) * val[0];
+        }
+        
+        for(int ind=1;ind<n;ind++){
+            for(int w=0;w<=W;w++){
+                int not_pick = dp[ind-1][w];
+                int pick = INT_MIN;
+                if(wt[ind] <= w) pick = val[ind] + dp[ind][w-wt[ind]];
+                dp[ind][w] = max(not_pick,pick);
+            }
+        }
+        
+        return dp[n-1][W];
     }
 };
 
