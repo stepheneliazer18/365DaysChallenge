@@ -25,22 +25,24 @@ class Solution{
         return dp[ind][n] = max(take,notTake);
     }
     int cutRod(int price[], int N) {
-        vector<vector<int>> dp(N,vector<int>(N+1,-1));
+        // vector<vector<int>> dp(N,vector<int>(N+1,-1));
         // return solve(N-1,N,price,dp);
         
-        for(int n=0;n<=N;n++) dp[0][n] = n * price[0];
+        vector<int> dp(N+1, -1);
+        
+        for(int n=0;n<=N;n++) dp[n] = n * price[0];
         
         for(int ind=1;ind<N;ind++){
             for(int n=0;n<=N;n++){
-                int notTake = dp[ind-1][n];
+                int notTake = dp[n];
                 int take = INT_MIN;
                 int rodLength = ind+1;
-                if(rodLength <= n) take = price[ind] + dp[ind][n-rodLength];
-                dp[ind][n] = max(take,notTake);
+                if(rodLength <= n) take = price[ind] + dp[n-rodLength];
+                dp[n] = max(take,notTake);
             }
         }
         
-        return dp[N-1][N];
+        return dp[N];
     }
 };
 
