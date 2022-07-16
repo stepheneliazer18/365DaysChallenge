@@ -17,23 +17,24 @@ public:
         string s2 = s1;
         reverse(s2.begin(),s2.end());
         
-        vector<vector<int>> dp(N+1,vector<int>(N+1,0));
+        // vector<vector<int>> dp(N+1,vector<int>(N+1,0));
         // return solve(N-1,N-1,s1,s2,dp);
         
-        for(int ind2=0;ind2<=N;ind2++) dp[0][ind2] = 0;
-        for(int ind1=0;ind1<=N;ind1++) dp[ind1][0] = 0;
+        vector<int> prev(N+1,0);
         
         for(int ind1=1;ind1<=N;ind1++){
+            vector<int> cur(N+1,0);
             for(int ind2=1;ind2<=N;ind2++){
-                if(s1[ind1-1] == s2[ind2-1]) dp[ind1][ind2] = 1 + dp[ind1-1][ind2-1];
+                if(s1[ind1-1] == s2[ind2-1]) cur[ind2] = 1 + prev[ind2-1];
                 else{
-                    int left = dp[ind1-1][ind2];
-                    int right = dp[ind1][ind2-1];
-                    dp[ind1][ind2] = max(left,right);
+                    int left = prev[ind2];
+                    int right = cur[ind2-1];
+                    cur[ind2] = max(left,right);
                 }
             }
+            prev = cur;
         }
 
-        return dp[N][N];
+        return prev[N];
     }
 };
