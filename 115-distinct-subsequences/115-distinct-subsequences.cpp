@@ -27,19 +27,16 @@ public:
         prev[0] = 1;
         
         for(int ind1=1;ind1<=n;ind1++){
-            vector<int> cur(m+1,0);
-            cur[0]=1;
-            for(int ind2=1;ind2<=m;ind2++){
+            for(int ind2=m;ind2>=1;ind2--){
                 if(s1[ind1-1] == s2[ind2-1]){
                     int moveBoth = prev[ind2-1];
                     int moveFirst = prev[ind2];
-                    cur[ind2] = (moveBoth + moveFirst) % mod;
+                    prev[ind2] = (moveBoth + moveFirst) % mod;
                 }
                 else{
-                    cur[ind2] = prev[ind2];
+                    prev[ind2] = prev[ind2];
                 }
             }
-            prev = cur;
         }
         return prev[m];
     }
