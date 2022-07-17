@@ -11,20 +11,18 @@ public:
     }
     int maximumSum(vector<int>& nums) {
         int n = nums.size();
-        vector<pair<int,int>> vec;
-        for(int i=0;i<n;i++){
-            vec.push_back({digitSum(nums[i]),nums[i]});
-        }
-        sort(vec.begin(),vec.end());
+        map<int,int> mp;
         
         int ans = -1;
-        int i = 1;
-        while(i<n){
-            while(i<n && vec[i].first == vec[i-1].first){
-                ans = max(ans,vec[i].second + vec[i-1].second);
-                i++;
+        for(auto &it: nums){
+            int dig = digitSum(it);
+            if(mp.find(dig) != mp.end()){
+                ans = max(ans,mp[dig]+it);
+                mp[dig] = max(mp[dig],it);
             }
-            i++;
+            else{
+                mp[dig] = it;
+            }
         }
         return ans;
     }
