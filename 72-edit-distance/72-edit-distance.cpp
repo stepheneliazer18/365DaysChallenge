@@ -21,7 +21,7 @@ public:
         int n = s1.size();
         int m = s2.size();
         
-        vector<vector<int>> dp(n+1,vector<int>(m+1,0));
+        // vector<vector<int>> dp(n+1,vector<int>(m+1,0));
         // return solve(n-1,m-1,s1,s2,dp);
         
         vector<int> prev(m+1,0);
