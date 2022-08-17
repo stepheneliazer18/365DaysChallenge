@@ -1,30 +1,19 @@
 class Solution {
 public:
     vector<string> split(string s){
-        int i = 0;
         int n = s.length();
         
         vector<string> ans;
+        string word;
         
-        string temp;
         for(int i=0;i<n;i++){
-            if(i == n-1){
-                if(isalpha(s[i])){
-                    temp += s[i];
-                    ans.push_back(temp);
-                }
-                else ans.push_back(temp);
-            }
-            else if(isalpha(s[i]) && s[i] != ' '){
-                temp += s[i];
-            }
-            else{
-                if(s[i] == ' ' || i+1 < n && !isalpha(s[i]) && isalpha(s[i+1])){
-                    ans.push_back(temp);
-                    temp = "";
-                }
+            if(s[i] >= 'A' && s[i] <= 'Z' || s[i] >= 'a' && s[i] <= 'z') word += s[i];
+            else if(word != ""){
+                ans.push_back(word);
+                word = "";
             }
         }
+        if(word != "") ans.push_back(word);
         return ans;
     }
     string mostCommonWord(string paragraph, vector<string>& banned) {
