@@ -3,12 +3,16 @@ public:
     vector<int> twoSum(vector<int>& numbers, int target) {
         int n = numbers.size();
         
-        map<int,int> mp;
-        for(int i=0;i<n;i++) mp[numbers[i]] = i;
+        int l = 0;
+        int r = n-1;
         
-        for(int i=0;i<n;i++){
-            int need = target - numbers[i];
-            if(mp.find(need) != mp.end() && mp[need] != i) return {i+1,mp[need]+1};
+        while(l < r){
+            int sum = numbers[l] + numbers[r];
+            
+            if(sum == target) return {l+1,r+1};
+            
+            if(sum < target) l++;
+            else r--;
         }
         
         return {0,1};
