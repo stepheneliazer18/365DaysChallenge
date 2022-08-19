@@ -3,18 +3,22 @@ public:
     vector<int> twoSum(vector<int>& numbers, int target) {
         int n = numbers.size();
         
-        int l = 0;
-        int r = n-1;
-        
-        while(l < r){
-            int sum = numbers[l] + numbers[r];
+        for(int i=0;i<n;i++){
+            int need = target-numbers[i];
             
-            if(sum == target) return {l+1,r+1};
+            int l = i+1;
+            int r = n-1;
             
-            if(sum < target) l++;
-            else r--;
+            while(l<=r){
+                int mid = (l+r)/2;
+                
+                if(numbers[mid] == need) return {i+1,mid+1};
+                
+                if(need < numbers[mid]) r = mid-1;
+                else l = mid+1;
+            }
+            
         }
-        
         return {0,1};
     }
 };
