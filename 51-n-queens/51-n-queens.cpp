@@ -3,13 +3,7 @@ public:
     bool isvalid(int row, int col, vector<string>& output){
         int i = row;
         int j = col;
-        
-        // up
-        while(i >= 0){
-            if(output[i][col] == 'Q') return false;
-            i--;
-        }
-        
+
         // left
         while(j >= 0){
             if(output[row][j] == 'Q') return false;
