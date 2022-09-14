@@ -9,8 +9,10 @@ public:
         
         queue<pair<int,int>> q;
         
+        int oranges = 0;
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
+                if(grid[i][j] == 1) oranges++;
                 if(grid[i][j] == 2){
                     q.push({i,j}); 
                 }
@@ -31,6 +33,7 @@ public:
                     
                     if(nr >= 0 && nr < m && nc >= 0 && nc < n && grid[nr][nc] == 1){
                         grid[nr][nc] = 2;
+                        oranges--;
                         q.push({nr,nc});
                     }
                 }
@@ -38,11 +41,7 @@ public:
             cnt++;
         }
         
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                if(grid[i][j] == 1) return -1;
-            }
-        }
+        if(oranges) return -1;
         return cnt == -1 ? 0 : cnt;
     }
 };
