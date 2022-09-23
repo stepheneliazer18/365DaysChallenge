@@ -1,7 +1,6 @@
 class Solution {
 public:
     int findGCD(vector<int>& nums) {
-        
         sort(nums.begin(),nums.end());
         
         for(int i = nums[0]; i>=0;i--){
