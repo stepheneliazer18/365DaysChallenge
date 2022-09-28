@@ -8,7 +8,7 @@ public:
         unordered_set<char>mp;
         for(auto &it: bl) mp.insert(it);
 
-        while(i<=text.size()){
+        while(i<=len){
             if(mp.count(text[i])) t=true;
             else  if(text[i]==' '||text[i]=='\0'){
                 if(!t) count++;
