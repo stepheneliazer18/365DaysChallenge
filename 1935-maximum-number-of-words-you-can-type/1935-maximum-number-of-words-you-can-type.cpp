@@ -11,8 +11,7 @@ public:
         while(i<=text.size()){
             if(mp.count(text[i])) t=true;
             else  if(text[i]==' '||text[i]=='\0'){
-                if(!t)
-                count++;
+                if(!t) count++;
                 t=false;
             }
             i++;
