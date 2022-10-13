@@ -25,14 +25,30 @@ public:
             adj[u].push_back(v);
         }
         
+        vector<vector<bool>> reachable(n,vector<bool>(n,false));
+        for(int i=0;i<n;i++){
+            queue<int> q;
+            q.push(i);
+            
+            while(!q.empty()){
+                int node = q.front();
+                q.pop();
+                
+                for(auto &it: adj[node]){
+                    if(!reachable[i][it]){
+                        q.push(it);
+                        reachable[i][it] = true;
+                    }
+                }
+            }
+        }
+        
         vector<bool> res;
         for(auto &it: queries){
             int u = it[0];
             int v = it[1];
             
-            vector<int> visited(n,0);
-            if(cango(u,v,adj,visited)) res.push_back(true);
-            else res.push_back(false);
+            res.push_back(reachable[u][v]);
         }
         
         return res;
