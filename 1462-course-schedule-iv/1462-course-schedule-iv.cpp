@@ -1,14 +1,5 @@
 class Solution {
 private:
-    int findlevel(map<int,vector<int>>& mp, int node){
-        for(auto &it: mp){
-            int cur = it.first;
-            for(auto &it1: it.second){
-                if(it1 == node) return cur;
-            }
-        }
-        return -1;
-    }
     bool cango(int src, int target, vector<int> adj[], vector<int>& visited){
         visited[src] = 1;
         
@@ -34,48 +25,7 @@ public:
             adj[u].push_back(v);
         }
         
-        vector<int> indegree(n,0);
-        for(int i=0;i<n;i++){
-            for(auto &it: adj[i]){
-                indegree[it]++;
-            }
-        }
-        
-        map<int,vector<int>> mp;
-        queue<pair<int,int>> q;
-        for(int i=0;i<n;i++){
-            if(indegree[i] == 0){
-                q.push({i,0});
-                mp[0].push_back(i);
-            }
-        }
-        
-        vector<int> topo;
-        
-        
-        while(!q.empty()){
-            int node = q.front().first;
-            int level = q.front().second;
-            q.pop();
-            
-            topo.push_back(node);
-            
-            for(auto &it: adj[node]){
-                indegree[it]--;
-                if(indegree[it] == 0){
-                    q.push({it,level+1});
-                    mp[level+1].push_back(it);
-                }
-            }
-        }
-        
-        
-        // for(auto &it: topo) cout<<it<<" ";cout<<endl;
         vector<bool> res;
-        // for(auto &it: mp){
-        //     cout<<it.first<<" -> ";
-        //     for(auto &it1: it.second) cout<<it1<<" ";cout<<endl;
-        // }
         for(auto &it: queries){
             int u = it[0];
             int v = it[1];
