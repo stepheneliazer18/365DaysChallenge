@@ -11,6 +11,7 @@ public:
         pair<int,int> source = {0,0};
         pair<int,int> destination = {n-1,m-1};
         if(grid[0][0] || grid[n-1][m-1]) return -1;
+        if(source == destination) return 1;
         
         vector<int> dx{0,1,1,1,0,-1,-1,-1};
         vector<int> dy{1,1,0,-1,-1,-1,0,1};
@@ -39,8 +40,6 @@ public:
                 }
             }
         }
-        int ans = distance[destination.first][destination.second];
-        if(ans == INT_MAX) return -1;
-        return ans;
+        return -1;
     }
 };
