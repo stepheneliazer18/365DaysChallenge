@@ -38,9 +38,6 @@ public:
                 }
             }
         }
-        // for(auto &it: distance){
-        //     for(auto &it1: it) cout<<it1<<" ";cout<<endl;
-        // }
         int ans = distance[destination.first][destination.second];
         if(ans == INT_MAX || grid[0][0] || grid[n-1][m-1]) return -1;
         return ans;
