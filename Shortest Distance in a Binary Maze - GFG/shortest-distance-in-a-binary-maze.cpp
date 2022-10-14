@@ -19,6 +19,10 @@ class Solution {
         int n = grid.size();
         int m = grid[0].size();
         
+        if(source == destination) return 0;
+        if(grid[source.first][source.second] == 0 ||
+           grid[destination.first][destination.second] == 0) return -1;
+        
         vector<int> dy{1,0,-1,0};
         vector<int> dx{0,1,0,-1};
         
@@ -40,14 +44,13 @@ class Solution {
                 int ny = y + dy[i];
                 
                 if(isvalid(nx,ny,n,m) && grid[nx][ny] && dist + 1 < distance[nx][ny]){
+                    if(nx == destination.first && ny == destination.second) return dist + 1;
                     q.push({dist+1,{nx,ny}});
                     distance[nx][ny] = dist+1;
                 }
             }
         }
-        int ans = distance[destination.first][destination.second];
-        if(ans == INT_MAX) return -1;
-        return ans;
+        return -1;
     }
 };
 
