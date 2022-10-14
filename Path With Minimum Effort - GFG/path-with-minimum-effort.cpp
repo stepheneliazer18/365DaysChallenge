@@ -5,7 +5,7 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
 private:
-    bool isvalid(int x, int y, int n, int m){
+    bool isValid(int x, int y, int n, int m){
         return x >= 0 && y >= 0 && x < n && y < m;
     }
 public:
@@ -16,31 +16,33 @@ public:
         vector<int> dx{0,1,0,-1};
         vector<int> dy{1,0,-1,0};
         
-        vector<vector<int>> difference(n,vector<int>(m,INT_MAX));
-        difference[0][0] = 0;
+        vector<vector<int>> effort(n,vector<int>(m,INT_MAX));
+        effort[0][0] = 0;
         
-        priority_queue<pair<int,pair<int,int>>, vector<pair<int,pair<int,int>>>, greater<pair<int,pair<int,int>>>> pq;
+        priority_queue<pair<int,pair<int,int>>, 
+        vector<pair<int,pair<int,int>>>, greater<pair<int,pair<int,int>>>> pq;
         pq.push({0,{0,0}});
         
         while(!pq.empty()){
             auto node = pq.top();
-            int diff = node.first;
-            int x = node.second.first;
-            int y = node.second.second;
             pq.pop();
+            int curEffort = node.first;
+            int row = node.second.first;
+            int col = node.second.second;
             
-            if(x == n-1 && y == m-1) return diff;
+            if(row == n-1 && col == m-1) return curEffort;
             
             for(int i=0;i<4;i++){
-                int nx = x + dx[i];
-                int ny = y + dy[i];
+                int newRow = row + dx[i];
+                int newCol = col + dy[i];
                 
-                
-                if(isvalid(nx,ny,n,m)){
-                    int newEffort = max(abs(heights[x][y] - heights[nx][ny]),diff);
-                    if(newEffort < difference[nx][ny]){
-                        difference[nx][ny] = newEffort;
-                        pq.push({newEffort,{nx,ny}});
+                if(isValid(newRow, newCol, n, m)){
+                    int nextEffort = abs(heights[newRow][newCol] - heights[row][col]);
+                    int newEffort = max(curEffort, nextEffort);
+                    
+                    if(newEffort < effort[newRow][newCol]){
+                        effort[newRow][newCol] = newEffort;
+                        pq.push({newEffort,{newRow,newCol}});
                     }
                 }
             }
