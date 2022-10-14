@@ -28,8 +28,6 @@ class Solution {
             int node = it.second.first;
             int amount = it.second.second;
             
-            if(stops > k) continue;
-
             for(auto &it: adj[node]){
                 int v = it.first;
                 int w = it.second;
