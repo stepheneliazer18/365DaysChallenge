@@ -20,9 +20,7 @@ class Solution {
         int m = grid[0].size();
         
         if(source == destination) return 0;
-        if(grid[source.first][source.second] == 0 ||
-           grid[destination.first][destination.second] == 0) return -1;
-        
+
         vector<int> dy{1,0,-1,0};
         vector<int> dx{0,1,0,-1};
         
