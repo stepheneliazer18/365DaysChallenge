@@ -16,17 +16,17 @@ public:
         vector<int> dy{1,1,0,-1,-1,-1,0,1};
         
         vector<vector<int>> distance(n,vector<int>(m,INT_MAX));
-        set<pair<int,pair<int,int>>> st;
+        queue<pair<int,pair<int,int>>> q;
 
-        st.insert({1,source});
+        q.push({1,source});
         distance[source.first][source.second] = 1;
         
-        while(!st.empty()){
-            auto node = *(st.begin());
+        while(!q.empty()){
+            auto node = q.front();
             int dist = node.first;
             int x = node.second.first;
             int y = node.second.second;
-            st.erase(node);
+            q.pop();
             
             for(int i=0;i<8;i++){
                 int nx = x + dx[i];
@@ -34,8 +34,7 @@ public:
                 
                 if(isvalid(nx,ny,n,m) && !grid[nx][ny] && dist + 1 < distance[nx][ny]){
                     if(nx == destination.first && ny == destination.second) return dist + 1;
-                    if(distance[nx][ny] != INT_MAX) st.erase({distance[nx][ny],{nx,ny}});
-                    st.insert({dist+1,{nx,ny}});
+                    q.push({dist+1,{nx,ny}});
                     distance[nx][ny] = dist+1;
                 }
             }
