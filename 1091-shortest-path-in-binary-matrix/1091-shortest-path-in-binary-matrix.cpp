@@ -10,6 +10,7 @@ public:
         
         pair<int,int> source = {0,0};
         pair<int,int> destination = {n-1,m-1};
+        if(grid[0][0]) return -1;
         
         vector<int> dx{0,1,1,1,0,-1,-1,-1};
         vector<int> dy{1,1,0,-1,-1,-1,0,1};
@@ -32,6 +33,7 @@ public:
                 int ny = y + dy[i];
                 
                 if(isvalid(nx,ny,n,m) && !grid[nx][ny] && dist + 1 < distance[nx][ny]){
+                    if(nx == destination.first && ny == destination.second) return dist + 1;
                     if(distance[nx][ny] != INT_MAX) st.erase({distance[nx][ny],{nx,ny}});
                     st.insert({dist+1,{nx,ny}});
                     distance[nx][ny] = dist+1;
