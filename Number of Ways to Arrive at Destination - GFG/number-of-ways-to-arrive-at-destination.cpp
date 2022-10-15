@@ -41,14 +41,14 @@ class Solution {
                 int w = it.second;
                 
                 if(dist + w < distance[v]){
-                    ways[v] += ways[node];
+                    ways[v] = ways[node];
                     pq.push({dist + w, v});
                     distance[v] = dist + w;
                 }
-                else if(dist + w == distance[v]) ways[v] += ways[node];
+                else if(dist + w == distance[v]) ways[v] = (ways[v] + ways[node]) % mod;
             }
         }
-        return ways[n-1];
+        return ways[n-1] % mod;
     }
 };
 
