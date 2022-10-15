@@ -11,7 +11,8 @@ class Solution {
         vector<int> distance(V,1e8);
         distance[S] = 0;
         
-        for(int i=1;i<V;i++){
+        vector<int> temp;
+        for(int i=0;i<V;i++){
             for(auto &it: edges){
                 int u = it[0];
                 int v = it[1];
@@ -21,17 +22,7 @@ class Solution {
                     distance[v] = distance[u] + w;
                 }
             }
-        }
-        
-        vector<int> temp = distance;
-        for(auto &it: edges){
-            int u = it[0];
-            int v = it[1];
-            int w = it[2];
-            
-            if(distance[u] != 1e8 && distance[u] + w < distance[v]){
-                distance[v] = distance[u] + w;
-            }
+            if(i == V-2) temp = distance;
         }
         
         if(temp != distance) return {-1};
