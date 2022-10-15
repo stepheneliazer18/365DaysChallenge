@@ -40,11 +40,12 @@ class Solution {
                 int v = it.first;
                 int w = it.second;
                 
-                if(dist + w <= distance[v]){
-                    ways[v] += ways[node];
-                    if(dist + w < distance[v]) pq.push({dist + w, v});
+                if(dist + w < distance[v]){
+                    ways[v] = 1;
+                    pq.push({dist + w, v});
                     distance[v] = dist + w;
                 }
+                else if(dist + w == distance[v]) ways[v] += ways[node];
             }
         }
         
