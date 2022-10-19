@@ -35,20 +35,19 @@ public:
         vector<int> vec;
         
         stack<Node*> st;
-        st.push(root);
+        Node* node = root;
         
-        while(!st.empty()){
-            Node* cur = st.top();
-            if(cur == NULL){
-                st.pop();
+        while(true){
+            if(node == NULL){
                 if(st.empty()) break;
-                cur = st.top();
-                vec.push_back(cur->data);
+                Node* cur = st.top();
                 st.pop();
-                st.push(cur->right);
+                vec.push_back(cur->data);
+                node = cur->right;
             }
             else{
-                st.push(cur->left);
+                st.push(node);
+                node = node->left;
             }
         }
         
