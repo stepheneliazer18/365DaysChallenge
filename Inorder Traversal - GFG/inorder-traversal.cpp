@@ -40,7 +40,7 @@ public:
         while(!st.empty()){
             Node* cur = st.top();
             if(cur == NULL){
-                while(!st.empty() && st.top() == NULL) st.pop();
+                st.pop();
                 if(st.empty()) break;
                 cur = st.top();
                 vec.push_back(cur->data);
