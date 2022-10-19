@@ -30,19 +30,27 @@ struct Node {
 }; */
 
 class Solution {
-private:
-    void inOrderTraversal(Node* root, vector<int>& vec){
-        if(root == NULL) return;
-        
-        inOrderTraversal(root->left, vec);
-        vec.push_back(root->data);
-        inOrderTraversal(root->right, vec);
-    }
 public:
     vector<int> inOrder(Node* root) {
         vector<int> vec;
         
-        inOrderTraversal(root,vec);
+        stack<Node*> st;
+        st.push(root);
+        
+        while(!st.empty()){
+            Node* cur = st.top();
+            if(cur == NULL){
+                while(!st.empty() && st.top() == NULL) st.pop();
+                if(st.empty()) break;
+                cur = st.top();
+                vec.push_back(cur->data);
+                st.pop();
+                st.push(cur->right);
+            }
+            else{
+                st.push(cur->left);
+            }
+        }
         
         return vec;
     }
