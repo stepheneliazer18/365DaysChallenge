@@ -131,6 +131,7 @@ struct Node
 
 vector <int> preorder(Node* root){
     vector<int> vec;
+    if(!root) return vec;
     
     stack<Node*> st;
     st.push(root);
