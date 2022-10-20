@@ -10,7 +10,6 @@
  * };
  */
 class Solution {
-    bool ans = true;
 private:
     int height(TreeNode* root){
         if(!root) return 0;
