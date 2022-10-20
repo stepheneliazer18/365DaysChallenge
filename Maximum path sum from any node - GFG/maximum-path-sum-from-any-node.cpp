@@ -89,7 +89,7 @@ private:
         int left = max(0,sum(root->left,maxi));
         int right = max(0,sum(root->right,maxi));
                 
-        maxi = max(maxi,root->data + left + right);
+        maxi = max(maxi, root->data + left + right);
         
         return root->data + max(left,right);
     }
