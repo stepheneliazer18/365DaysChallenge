@@ -18,22 +18,22 @@ public:
         queue<TreeNode*> q;
         q.push(root);
         
-        int num = 1;
+        bool flag = false;
         while(!q.empty()){
             int size = q.size();
-            vector<int> level;
+            vector<int> level(size);
             for(int i=0;i<size;i++){
                 TreeNode* node = q.front();
                 q.pop();
                 
-                level.push_back(node->val);
+                if(flag) level[size-i-1] = node->val;
+                else level[i] = node->val;
                 
                 if(node->left) q.push(node->left);
                 if(node->right) q.push(node->right);
             }
-            if(num % 2 == 0) reverse(level.begin(),level.end());
             ans.push_back(level);
-            num++;
+            flag = !flag;
         }
         
         return ans;
