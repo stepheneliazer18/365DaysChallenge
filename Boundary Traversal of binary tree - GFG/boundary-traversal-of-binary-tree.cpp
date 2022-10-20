@@ -105,53 +105,49 @@ struct Node
 
 class Solution {
 private:
-    void leafNodes(Node* root, vector<int>& leaves){
+    bool isLeaf(Node* root){
+        return !root->left && !root->right;
+    }
+    void leftBoundary(Node* root, vector<int>& ans){
+        Node* cur = root->left;
+        
+        while(cur){
+            if(!isLeaf(cur)) ans.push_back(cur->data);
+            if(cur->left) cur = cur->left;
+            else cur = cur->right;
+        }
+    }
+    void rightBoundary(Node* root, vector<int>& ans){
+        Node* cur = root->right;
+        vector<int> temp;
+        
+        while(cur){
+            if(!isLeaf(cur)) temp.push_back(cur->data);
+            if(cur->right) cur = cur->right;
+            else cur = cur->left;
+        }
+        
+        for(int i=temp.size()-1;i>=0;i--) ans.push_back(temp[i]);
+    }
+    void leafNodes(Node* root, vector<int>& ans){
         if(!root) return;
-        if(!root->left && !root->right) leaves.push_back(root->data);
+        if(isLeaf(root)){
+            ans.push_back(root->data);
+            return;
+        };
         
-        leafNodes(root->left, leaves);
-        leafNodes(root->right, leaves);
-    }
-    void leftBoundary(Node* root, vector<int>& leftVec){
-        if(!root || (!root->left && !root->right)) return;
-        
-        leftVec.push_back(root->data);
-        if(root->left){
-            leftBoundary(root->left,leftVec);
-        }
-        else{
-            leftBoundary(root->right,leftVec);
-        }
-    }
-    void rightBoundary(Node* root, vector<int>& rightVec){
-        if(!root || (!root->left && !root->right)) return;
-        
-        rightVec.push_back(root->data);
-        if(root->right){
-            rightBoundary(root->right,rightVec);
-        }
-        else{
-            rightBoundary(root->left,rightVec);
-        }
+        leafNodes(root->left, ans);
+        leafNodes(root->right, ans);
     }
 public:
     vector <int> boundary(Node *root){
         vector<int> ans;
         if(!root) return ans;
-        if(!root->left && !root->right) return {root->data};
+        if(!isLeaf(root)) ans.push_back(root->data);
         
-        vector<int> leftVec;
-        vector<int> rightVec;
-        vector<int> leaves;
-        leftBoundary(root->left,leftVec);
-        rightBoundary(root->right,rightVec);
-        leafNodes(root,leaves);
-        ans.push_back(root->data);
-        for(auto &it: leftVec) ans.push_back(it);
-        for(auto &it: leaves) ans.push_back(it);
-        for(int i=0;i<rightVec.size();i++){
-            ans.push_back(rightVec[rightVec.size() - i - 1]);
-        }
+        leftBoundary(root,ans);
+        leafNodes(root,ans);
+        rightBoundary(root,ans);
         
         return ans;
     }
