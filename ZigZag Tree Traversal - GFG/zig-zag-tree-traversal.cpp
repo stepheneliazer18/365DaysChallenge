@@ -103,8 +103,8 @@ struct Node {
 class Solution{
     public:
     vector <int> zigZagTraversal(Node* root){
-    	if(!root) return {};
         vector<int> ans;
+        if(!root) return ans;
         
         queue<Node*> q;
         q.push(root);
