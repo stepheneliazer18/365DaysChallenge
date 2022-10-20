@@ -11,35 +11,22 @@
  */
 class Solution {
 private:
-    int sum(TreeNode* root){
+    int sum(TreeNode* root, int& maxi){
         if(!root) return 0;
         
-        int left = sum(root->left);
-        int right = sum(root->right);
+        int left = max(0,sum(root->left,maxi));
+        int right = max(0,sum(root->right,maxi));
+                
+        maxi = max(maxi,root->val + left + right);
         
-        int ans = root->val + max(left,right);
-        return max(ans,0);
+        return root->val + max(left,right);;
     }
 public:
     int maxPathSum(TreeNode* root) {
-        if(!root) return INT_MIN;
+        int maxi = INT_MIN;
         
-        int ls = sum(root->left);
-        int rs = sum(root->right);
+        sum(root,maxi);
         
-        int sum = ls + rs + root->val;
-        
-        int leftMax = maxPathSum(root->left);
-        int rightMax = maxPathSum(root->right);
-        
-        int maxi = max(leftMax, rightMax);
-        // cout<<"root = "<<root->val<<endl;
-        // cout<<"left = "<<ls<<endl;
-        // cout<<"right = "<<rs<<endl;
-        // cout<<"sum = "<<sum<<endl;
-        // cout<<"leftMax = "<<leftMax<<endl;
-        // cout<<"rightMax = "<<rightMax<<endl;
-        // cout<<" -------------------- "<<endl;
-        return max(maxi,sum);
+        return maxi;
     }
 };
