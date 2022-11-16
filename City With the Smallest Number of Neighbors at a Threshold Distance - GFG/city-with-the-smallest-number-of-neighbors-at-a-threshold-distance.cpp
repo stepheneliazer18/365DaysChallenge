@@ -7,11 +7,23 @@ using namespace std;
 // } Driver Code Ends
 // User function Template for C++
 class Solution {
+private:
+    void flloydWarshall(vector<vector<int>>& matrix){
+        int n = matrix.size();
+        
+        for(int k=0;k<n;k++){
+            for(int i=0;i<n;i++){
+                for(int j=0;j<n;j++){
+                    if(matrix[i][k] == INT_MAX || matrix[k][j] == INT_MAX) continue;
+                    matrix[i][j] = min(matrix[i][k] + matrix[k][j], matrix[i][j]);
+                }
+            }
+        }
+    }
 public:
     int findCity(int n, int m, vector<vector<int>>& edges, int distanceThreshold) {
         
         vector<vector<int>> matrix(n,vector<int>(n,INT_MAX));
-        
         
         for(auto &it: edges){
             int u = it[0];
@@ -23,15 +35,8 @@ public:
         }
         for(int i=0;i<n;i++) matrix[i][i] = 0;
         
-        for(int k=0;k<n;k++){
-            for(int i=0;i<n;i++){
-                for(int j=0;j<n;j++){
-                    if(matrix[i][k] == INT_MAX || matrix[k][j] == INT_MAX) continue;
-                    matrix[i][j] = min(matrix[i][k] + matrix[k][j], matrix[i][j]);
-                }
-            }
-        }
-
+        flloydWarshall(matrix);
+        
         int ans = -1;
         int mini = n;
         for(int i=0;i<n;i++){
