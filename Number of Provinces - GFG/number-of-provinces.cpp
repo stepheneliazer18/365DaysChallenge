@@ -7,8 +7,9 @@ using namespace std;
 //User function Template for C++
 
 class DisjointSet{
-public:
+private:
     vector<int> size, parent;
+public:
     DisjointSet(int n){
         size.resize(n+1,1);
         parent.resize(n+1);
@@ -55,7 +56,7 @@ class Solution {
         }
         
         for(int i=0;i<V;i++){
-            if(ds.parent[i] == i) cnt++;
+            if(ds.findUPar(i) == i) cnt++;
         }
         
         return cnt;
