@@ -60,7 +60,8 @@ class Solution {
             if(ds.parent[i] == i) noOfComponents++;
         }
         
-        if(extraEdges >= noOfComponents - 1) return noOfComponents - 1;
+        int edgesRequired = noOfComponents - 1;
+        if(extraEdges >= edgesRequired) return noOfComponents - 1;
         return -1;
     }
 };
