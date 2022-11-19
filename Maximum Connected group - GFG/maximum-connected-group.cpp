@@ -70,7 +70,7 @@ public:
         
         int maxCnt = 0;
         
-        map<int,int> mp;
+        set<int> st;
         for(int i=0;i<n;i++){
             for(int j=0;j<n;j++){
                 int curCnt = 1;
@@ -82,14 +82,14 @@ public:
                         int adjCellNo = (n * nx) + ny;
                         if(isValid(nx,ny,n) && grid[nx][ny] == 1){
                             int adjUltPar = ds.findUPar(adjCellNo);
-                            if(mp.find(adjUltPar) != mp.end()) continue;
+                            if(st.find(adjUltPar) != st.end()) continue;
                             curCnt += ds.size[adjUltPar];
-                            mp[adjUltPar] = 1;
+                            st.insert(adjUltPar);
                         }
                     }
                 }
                 maxCnt = max(maxCnt, curCnt);
-                mp.clear();
+                st.clear();
             }
         }
         
