@@ -46,11 +46,12 @@ class Solution {
             n = max(n,it[0]);
             m = max(m,it[1]);
         }
+        n++;m++;
         
-        DisjointSet ds(n+m+1);
+        DisjointSet ds(n+m);
         for(auto &it: stones){
             int rowNode = it[0];
-            int colNode = it[1] + n + 1;
+            int colNode = it[1] + n;
             
             ds.unionBySize(rowNode, colNode);
         }
