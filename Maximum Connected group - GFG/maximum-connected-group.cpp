@@ -60,7 +60,6 @@ public:
                         int ny = j + dy[x];
                         int adjCellNo = (n * nx) + ny;
                         if(isValid(nx,ny,n) && grid[nx][ny] == 1){
-                            if(ds.findUPar(curCellNo) == ds.findUPar(adjCellNo)) continue;
                             ds.unionBySize(curCellNo, adjCellNo);
                         }
                     }
