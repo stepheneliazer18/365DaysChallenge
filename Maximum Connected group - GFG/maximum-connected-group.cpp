@@ -69,11 +69,12 @@ public:
         
         int maxCnt = 0;
         
-        set<int> st;
+        
         for(int i=0;i<n;i++){
             for(int j=0;j<n;j++){
                 int curCnt = 1;
                 if(grid[i][j] == 0){
+                    set<int> st;
                     int curCellNo = (n * i) + j;
                     for(int x=0;x<4;x++){
                         int nx = i + dx[x];
@@ -88,7 +89,6 @@ public:
                     }
                 }
                 maxCnt = max(maxCnt, curCnt);
-                st.clear();
             }
         }
         
