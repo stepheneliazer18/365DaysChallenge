@@ -38,21 +38,28 @@ struct Node
 
 // Should return  right view of tree
 class Solution {
-private:
-    void preOrderTraversal(Node* root, int level, vector<int>& vec){
-        if(root == NULL) return;
-        
-        if(vec.size() == level) vec.push_back(root->data);
-        preOrderTraversal(root->right, level+1, vec);
-        preOrderTraversal(root->left, level+1, vec);
-    }
 public:
     vector<int> rightView(Node *root){
        vector<int> ans;
-       
-       preOrderTraversal(root, 0, ans);
-       
-       return ans;
+    
+        queue<Node*> q;
+        q.push(root);
+        
+        while(!q.empty()){
+            int size = q.size();
+            
+            for(int i=0;i<size;i++){
+                Node* node = q.front();
+                q.pop();
+                
+                if(i == size-1) ans.push_back(node->data);
+                
+                if(node->left) q.push(node->left);
+                if(node->right) q.push(node->right);
+            }
+        }
+        
+        return ans;
     }
 };
 
