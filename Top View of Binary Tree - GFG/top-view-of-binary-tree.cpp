@@ -98,50 +98,30 @@ struct Node
 };
 */
 class Solution {
-private:
-    vector<vector<int>> verticalTraversal(Node* root) {
-        map<int,map<int,multiset<int>>> mp;
+public:
+    vector<int> topView(Node *root){
         
-        queue<pair<Node*,pair<int,int>>> q;
-        q.push({root,{0,0}});
+        map<int,int> mp;
         
+        queue<pair<Node*,int>> q;
+        q.push({root,0});
         
         while(!q.empty()){
             auto it = q.front();
             q.pop();
+            
             Node* node = it.first;
-            int vertical = it.second.first;
-            int level = it.second.second;
+            int vertical = it.second;
             
-            mp[vertical][level].insert(node->data);
+            if(mp.find(vertical) == mp.end()) mp[vertical] = node->data;
             
-            if(node->left){
-                q.push({node->left,{vertical-1,level+1}});
-                
-            }
-            if(node->right){
-                q.push({node->right,{vertical+1,level+1}});
-            }
+            if(node->left) q.push({node->left,vertical-1});
+            if(node->right) q.push({node->right,vertical+1});
         }
-        
-        vector<vector<int>> ans;
-        for(auto &it: mp){
-            vector<int> col;
-            for(auto &it1: it.second){
-                col.insert(col.end(),it1.second.begin(),it1.second.end());
-            }
-            ans.push_back(col);
-        }
-        
-        return ans;
-    }
-public:
-    vector<int> topView(Node *root){
-        vector<vector<int>> verticalOrder = verticalTraversal(root);
         
         vector<int> ans;
-        for(auto &it: verticalOrder){
-            ans.push_back(it[0]);
+        for(auto &it: mp){
+            ans.push_back(it.second);
         }
         
         return ans;
