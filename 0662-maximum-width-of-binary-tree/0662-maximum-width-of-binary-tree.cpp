@@ -22,14 +22,14 @@ public:
             int first,last;
             for(int i=0;i<size;i++){
                 TreeNode* node = q.front().first;
-                int index = q.front().second - minIndex;
+                long long index = q.front().second - minIndex;
                 q.pop();
                 
                 if(i == 0) first = index;
                 if(i == size-1) last = index;
                 
-                if(node->left) q.push({node->left, 2 * (long long)(index) + 1});
-                if(node->right) q.push({node->right, 2 * (long long)(index) + 2});
+                if(node->left) q.push({node->left, 2 * index + 1});
+                if(node->right) q.push({node->right, 2 * index + 2});
             }
             
             maxWidth = max(maxWidth, last - first + 1);
