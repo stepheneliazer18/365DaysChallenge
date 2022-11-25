@@ -136,10 +136,10 @@ class Solution {
                     visited[parentTracker[node]] = true;
                 }
             }
-            if(!q.empty()) seconds++;
+            seconds++;
         }
         
-        return seconds;
+        return seconds - 1;
     }
     
     
