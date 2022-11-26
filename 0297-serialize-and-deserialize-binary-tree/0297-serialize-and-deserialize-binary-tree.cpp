@@ -8,13 +8,6 @@
  * };
  */
 class Codec {
-private:
-    int getValue(int& i, string data){
-        string temp = "";
-        while(data[i] != ',') temp += data[i++];
-        i++;
-        return stoi(temp);
-    }
 public:
     string serialize(TreeNode* root) {
         if(!root) return "";
