@@ -16,36 +16,29 @@ private:
         return stoi(temp);
     }
 public:
-
-    // Encodes a tree to a single string.
     string serialize(TreeNode* root) {
         if(!root) return "#";
-        string ans;
         
+        string ans;
         queue<TreeNode*> q;
         q.push(root);
-        ans += to_string(root->val) + ',';
-        
+
         while(!q.empty()){
             TreeNode* node = q.front();
             q.pop();
             
-            if(node->left){
+            if(!node) ans += "#,";
+            else ans += to_string(node->val) + ',';
+            
+            if(node){
                 q.push(node->left);
-                ans += to_string(node->left->val) + ',';
-            }
-            else ans += "#,";
-            if(node->right){
                 q.push(node->right);
-                ans += to_string(node->right->val) + ',';
-            } 
-            else ans += "#,";
+            }
         }
         
         return ans;
     }
 
-    // Decodes your encoded data to tree.
     TreeNode* deserialize(string data) {
         if(data[0] == '#') return NULL;
         
@@ -54,7 +47,7 @@ public:
         
         queue<TreeNode*> q;
         q.push(root);        
-             
+        
         while(!q.empty()){
             TreeNode* node = q.front();
             q.pop();
