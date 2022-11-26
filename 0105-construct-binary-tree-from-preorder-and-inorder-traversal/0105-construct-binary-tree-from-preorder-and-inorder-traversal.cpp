@@ -12,8 +12,7 @@
 class Solution {
 private:
     TreeNode* buildTreeHelp(vector<int>& preorder, vector<int>& inorder, map<int,int>& inMap, int preStart, int preEnd, int inStart, int inEnd){
-        int n = preEnd - preStart + 1;
-        if(n == 0) return NULL;
+        if(preStart > preEnd) return NULL;
         
         TreeNode* root = new TreeNode(preorder[preStart]);
         int rootIndex = inMap[root->val];
