@@ -17,20 +17,8 @@ private:
         TreeNode* root = new TreeNode(preorder[preStart]);
         int rootIndex = inMap[root->val];
         
-        int leftInStart = inStart;
-        int leftInEnd = rootIndex - 1;
-        int rightInStart = rootIndex + 1;
-        int rightInEnd = inEnd;
-        
-        int leftInSize = leftInEnd - leftInStart + 1;
-        
-        int leftPreStart = preStart + 1;
-        int leftPreEnd = preStart + leftInSize;
-        int rightPreStart = leftPreEnd + 1;
-        int rightPreEnd = preEnd;
-        
-        root->left = buildTreeHelp(preorder, inorder, inMap, leftPreStart, leftPreEnd, leftInStart, leftInEnd);
-        root->right = buildTreeHelp(preorder, inorder, inMap, rightPreStart, rightPreEnd, rightInStart, rightInEnd);
+        root->left = buildTreeHelp(preorder, inorder, inMap, preStart + 1, preStart + 1 + rootIndex - 1 - inStart, inStart, rootIndex - 1);
+        root->right = buildTreeHelp(preorder, inorder, inMap, preStart + 1 + rootIndex - inStart, preEnd, rootIndex + 1, inEnd);
         
         return root;
     }
