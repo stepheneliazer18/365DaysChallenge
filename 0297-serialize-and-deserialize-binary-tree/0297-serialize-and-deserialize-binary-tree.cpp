@@ -17,7 +17,7 @@ private:
     }
 public:
     string serialize(TreeNode* root) {
-        if(!root) return "#";
+        if(!root) return "";
         
         string ans;
         queue<TreeNode*> q;
@@ -40,10 +40,12 @@ public:
     }
 
     TreeNode* deserialize(string data) {
-        if(data[0] == '#') return NULL;
+        if(data.size() == 0) return NULL;
         
-        int i = 0;
-        TreeNode* root = new TreeNode(getValue(i,data));
+        stringstream s(data);
+        string temp;
+        getline(s, temp, ',');
+        TreeNode* root = new TreeNode(stoi(temp));
         
         queue<TreeNode*> q;
         q.push(root);        
@@ -51,23 +53,19 @@ public:
         while(!q.empty()){
             TreeNode* node = q.front();
             q.pop();
-                                    
-            if(data[i] == '#'){
-                node->left = NULL;
-                i += 2;
-            }
+                    
+            getline(s, temp, ',');
+            if(temp == "#") node->left = NULL;
             else{
-                TreeNode* newNode = new TreeNode(getValue(i,data));
+                TreeNode* newNode = new TreeNode(stoi(temp));
                 node->left = newNode;
                 q.push(newNode);
             }
             
-            if(data[i] == '#'){
-                node->right = NULL;
-                i += 2;
-            }
+            getline(s, temp, ',');
+            if(temp == "#") node->right = NULL;
             else{
-                TreeNode* newNode = new TreeNode(getValue(i,data));
+                TreeNode* newNode = new TreeNode(stoi(temp));
                 node->right = newNode;
                 q.push(newNode);
             }
