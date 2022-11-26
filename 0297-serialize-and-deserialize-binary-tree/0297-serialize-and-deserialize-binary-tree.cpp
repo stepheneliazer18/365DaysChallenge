@@ -27,7 +27,7 @@ public:
             TreeNode* node = q.front();
             q.pop();
             
-            if(!node) ans += "#,";
+            if(!node) ans += "N,";
             else ans += to_string(node->val) + ',';
             
             if(node){
@@ -55,7 +55,7 @@ public:
             q.pop();
                     
             getline(s, temp, ',');
-            if(temp == "#") node->left = NULL;
+            if(temp == "N") node->left = NULL;
             else{
                 TreeNode* newNode = new TreeNode(stoi(temp));
                 node->left = newNode;
@@ -63,7 +63,7 @@ public:
             }
             
             getline(s, temp, ',');
-            if(temp == "#") node->right = NULL;
+            if(temp == "N") node->right = NULL;
             else{
                 TreeNode* newNode = new TreeNode(stoi(temp));
                 node->right = newNode;
