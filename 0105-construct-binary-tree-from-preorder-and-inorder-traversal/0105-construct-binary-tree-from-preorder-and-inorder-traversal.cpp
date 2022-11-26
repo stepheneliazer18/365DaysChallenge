@@ -27,13 +27,8 @@ public:
             else rightSubIn.push_back(inorder[i]);
         }
         
-        vector<int> leftSubPre, rightSubPre;
-        for(int i=0;i<leftSubIn.size();i++){
-            leftSubPre.push_back(preorder[i+1]);
-        }
-        for(int i=0;i<rightSubIn.size();i++){
-            rightSubPre.push_back(preorder[i+1+leftSubIn.size()]);
-        }
+        vector<int> leftSubPre(preorder.begin()+1, preorder.begin()+1+leftSubIn.size());
+        vector<int> rightSubPre(preorder.begin()+1+leftSubIn.size(), preorder.end());
         
         root->left = buildTree(leftSubPre, leftSubIn);
         root->right = buildTree(rightSubPre, rightSubIn);
