@@ -10,29 +10,41 @@
  * };
  */
 class Solution {
+private:
+    TreeNode* buildTreeHelp(vector<int>& preorder, vector<int>& inorder, map<int,int>& inMap, int preStart, int preEnd, int inStart, int inEnd){
+        int n = preEnd - preStart + 1;
+        if(n == 0) return NULL;
+        
+        TreeNode* root = new TreeNode(preorder[preStart]);
+        int rootIndex = inMap[root->val];
+        
+        int leftInStart = inStart;
+        int leftInEnd = rootIndex - 1;
+        int rightInStart = rootIndex + 1;
+        int rightInEnd = inEnd;
+        
+        int leftInSize = leftInEnd - leftInStart + 1;
+        
+        int leftPreStart = preStart + 1;
+        int leftPreEnd = preStart + leftInSize;
+        int rightPreStart = leftPreEnd + 1;
+        int rightPreEnd = preEnd;
+        
+        root->left = buildTreeHelp(preorder, inorder, inMap, leftPreStart, leftPreEnd, leftInStart, leftInEnd);
+        root->right = buildTreeHelp(preorder, inorder, inMap, rightPreStart, rightPreEnd, rightInStart, rightInEnd);
+        
+        return root;
+    }
 public:
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
         int n = preorder.size();
         if(n == 0) return NULL;
-        TreeNode* root = new TreeNode(preorder[0]);
         
-        vector<int> leftSubIn, rightSubIn;
-        bool flag = true;
+        map<int,int> inMap;
         for(int i=0;i<n;i++){
-            if(inorder[i] == root->val){
-                flag = false;
-                continue;
-            }
-            if(flag) leftSubIn.push_back(inorder[i]);
-            else rightSubIn.push_back(inorder[i]);
+            inMap[inorder[i]] = i;
         }
         
-        vector<int> leftSubPre(preorder.begin()+1, preorder.begin()+1+leftSubIn.size());
-        vector<int> rightSubPre(preorder.begin()+1+leftSubIn.size(), preorder.end());
-        
-        root->left = buildTree(leftSubPre, leftSubIn);
-        root->right = buildTree(rightSubPre, rightSubIn);
-        
-        return root;
+        return buildTreeHelp(preorder, inorder, inMap, 0, n-1, 0, n-1);
     }
 };
