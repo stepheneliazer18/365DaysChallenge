@@ -100,15 +100,21 @@ class Solution {
 public:
     Node* prev = NULL;
     void flatten(Node *root){
-        if(!root) return;
+        stack<Node*> st;
+        st.push(root);
         
-        flatten(root->right);
-        flatten(root->left);
-        
-        root->right = prev;
-        root->left = NULL;
-        
-        prev = root;
+        while(!st.empty()){
+            Node* cur = st.top();
+            st.pop();
+            
+            if(cur->right) st.push(cur->right);
+            if(cur->left) st.push(cur->left);
+            
+            if(!st.empty()){
+                cur->right = st.top();
+            }
+            cur->left = NULL;
+        }
     }
 };
 
