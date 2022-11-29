@@ -121,19 +121,19 @@ Node* insert(Node* root, int key) {
     Node* cur = root;
     
     while(cur){
-        if(key == cur->data) return root;
+        if(key == cur->data) break;
         if(key < cur->data){
             if(cur->left) cur = cur->left;
             else{
                 cur->left = new Node(key);
-                return root;
+                break;
             }
         }
         else {
             if(cur->right) cur = cur->right;
             else{
                 cur->right = new Node(key);
-                return root;
+                break;
             }
         }
     }
