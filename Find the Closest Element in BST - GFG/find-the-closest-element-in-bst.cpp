@@ -20,11 +20,8 @@ struct Node {
 // } Driver Code Ends
 
 
-class Solution
-{
-    public:
-    //Function to find the least absolute difference between any node
-	//value of the BST and the given integer.
+class Solution{
+    public:    
     int minDiff(Node *root, int K){
         int c = INT_MAX, f = INT_MAX;
         
