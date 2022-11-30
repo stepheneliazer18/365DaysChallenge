@@ -12,18 +12,20 @@
 class Solution {
 private:
     int counter = 0;
-    int inorder(TreeNode* root, int k){
-        if(!root) return -1;
+    void inorder(TreeNode* root, int k, int& ans){
+        if(!root) return;
         
-        int l = inorder(root->left, k);
-        counter++;
-        if(counter == k) return root->val;
-        int r = inorder(root->right, k);
-        if(l == -1) return r;
-        return l;
+        inorder(root->left, k, ans);
+        if(++counter == k){
+            ans = root->val;
+            return;
+        }
+        inorder(root->right, k, ans);
     }
 public:
     int kthSmallest(TreeNode* root, int k) {
-        return inorder(root,k);
+        int ans = -1;
+        inorder(root,k,ans);
+        return ans;
     }
 };
