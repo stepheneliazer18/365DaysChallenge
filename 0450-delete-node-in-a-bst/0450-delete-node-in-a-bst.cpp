@@ -42,10 +42,7 @@ private:
 public:
     TreeNode* deleteNode(TreeNode* root, int key) {
         if(root && root->val == key){
-            if(root->left){
-                return helper(root);
-            }
-            return root->right;
+            return helper(root);
         }
         deleteHelp(root,key);
         return root;
