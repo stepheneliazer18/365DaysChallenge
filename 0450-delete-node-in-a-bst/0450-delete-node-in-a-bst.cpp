@@ -11,35 +11,31 @@
  */
 class Solution {
 private:
+    void helper(TreeNode* root){
+        if(!root->left){
+            root->left = root->right;
+            return;
+        }
+        TreeNode* prev = root->left;
+        TreeNode* rightPart = root->right;
+        while(prev && prev->right) prev = prev->right;
+        if(prev) prev->right = rightPart;
+    }
     void deleteHelp(TreeNode* root, int key){
         if(!root) return;
         
         if(key < root->val) {
             if(root->left && root->left->val == key){
-                if(!root->left->left){
-                    root->left = root->left->right;
-                    return;
-                }
-                TreeNode* rightPart = root->left->right;
-                TreeNode* prev = root->left->left;
-                while(prev->right) prev = prev->right;
+                helper(root->left);
                 root->left = root->left->left;
-                prev->right = rightPart;
                 return;
             }
             deleteHelp(root->left, key);
         }
         else {
             if(root->right && root->right->val == key){
-                if(!root->right->left){
-                    root->right = root->right->right;
-                    return;
-                }
-                TreeNode* rightPart = root->right->right;
-                TreeNode* prev = root->right->left;
-                while(prev->right) prev = prev->right;
+                helper(root->right);
                 root->right = root->right->left;
-                prev->right = rightPart;
                 return;
             }
             deleteHelp(root->right, key);
@@ -49,14 +45,10 @@ public:
     TreeNode* deleteNode(TreeNode* root, int key) {
         if(root && root->val == key){
             if(root->left){
-                TreeNode* rightPart = root->right;
-                TreeNode* prev = root->left;
-                while(prev && prev->right) prev = prev->right;
+                helper(root);
                 root = root->left;
-                if(prev) prev->right = rightPart;
-                return root;
             }
-            root = root->right;
+            else root = root->right;
             return root;
         }
         deleteHelp(root,key);
