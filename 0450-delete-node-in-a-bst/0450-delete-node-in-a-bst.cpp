@@ -11,31 +11,29 @@
  */
 class Solution {
 private:
-    void helper(TreeNode* root){
+    TreeNode* helper(TreeNode* root){
         if(!root->left){
-            root->left = root->right;
-            return;
+            return root->right;
         }
         TreeNode* prev = root->left;
         TreeNode* rightPart = root->right;
-        while(prev && prev->right) prev = prev->right;
-        if(prev) prev->right = rightPart;
+        while(prev->right) prev = prev->right;
+        prev->right = rightPart;
+        return root->left;
     }
     void deleteHelp(TreeNode* root, int key){
         if(!root) return;
         
         if(key < root->val) {
             if(root->left && root->left->val == key){
-                helper(root->left);
-                root->left = root->left->left;
+                root->left = helper(root->left);
                 return;
             }
             deleteHelp(root->left, key);
         }
         else {
             if(root->right && root->right->val == key){
-                helper(root->right);
-                root->right = root->right->left;
+                root->right = helper(root->right);
                 return;
             }
             deleteHelp(root->right, key);
@@ -45,11 +43,9 @@ public:
     TreeNode* deleteNode(TreeNode* root, int key) {
         if(root && root->val == key){
             if(root->left){
-                helper(root);
-                root = root->left;
+                return helper(root);
             }
-            else root = root->right;
-            return root;
+            return root->right;
         }
         deleteHelp(root,key);
         return root;
