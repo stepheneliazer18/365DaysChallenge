@@ -11,21 +11,67 @@
  */
 class Solution {
 private:
-    int counter = 0;
-    void inorder(TreeNode* root, int k, int& ans){
-        if(!root) return;
+    vector<int> inOrder(TreeNode* root) {
+        vector<int> inorder;
         
-        inorder(root->left, k, ans);
-        if(++counter == k){
-            ans = root->val;
-            return;
+        TreeNode* cur = root;
+        
+        while(cur){
+            if(!cur -> left) {
+                inorder.push_back(cur->val);
+                cur = cur->right;
+            }
+            else {
+                TreeNode* prev = cur->left;
+                while(prev->right && prev->right != cur){
+                    prev = prev->right;
+                }
+                
+                if(prev->right == cur){
+                    prev->right = NULL;
+                    inorder.push_back(cur->val);
+                    cur = cur->right;
+                }
+                else{
+                    prev->right = cur;
+                    cur = cur->left;
+                }
+            }
         }
-        inorder(root->right, k, ans);
+        
+        return inorder;
     }
+
 public:
     int kthSmallest(TreeNode* root, int k) {
-        int ans = -1;
-        inorder(root,k,ans);
-        return ans;
+        // int counter = 0;
+        
+//         TreeNode* cur = root;
+        
+//         while(cur){
+//             if(!cur -> left) {
+//                 if(++counter == k) return cur->val;
+//                 cur = cur->right;
+//             }
+//             else {
+//                 TreeNode* prev = cur->left;
+//                 while(prev->right && prev->right != cur){
+//                     prev = prev->right;
+//                 }
+                
+//                 if(prev->right == cur){
+//                     prev->right = NULL;
+//                     if(++counter == k) return cur->val;
+//                     cur = cur->right;
+//                 }
+//                 else{
+//                     prev->right = cur;
+//                     cur = cur->left;
+//                 }
+//             }
+//         }
+        vector<int> in = inOrder(root);
+        return in[k-1];
+        return -1;
     }
 };
