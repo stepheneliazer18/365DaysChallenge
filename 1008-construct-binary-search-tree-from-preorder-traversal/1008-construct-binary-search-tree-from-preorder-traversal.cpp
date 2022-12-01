@@ -12,7 +12,7 @@
 class Solution {
 private:
     TreeNode* constructBST(int& i, int ub, vector<int>& preorder){
-        if(i >= preorder.size() || preorder[i] > ub) return NULL;
+        if(i == preorder.size() || preorder[i] > ub) return NULL;
         
         TreeNode* root = new TreeNode(preorder[i++]);
         root->left = constructBST(i, root->val, preorder);
