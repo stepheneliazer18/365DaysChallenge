@@ -124,9 +124,7 @@ private:
     }
 public:
     Node * inOrderSuccessor(Node *root, Node *x) {
-        Node* successor = NULL;
-        
-        return inorder(root, x, successor);
+        return inorder(root, x, NULL);
     }
 };
 
