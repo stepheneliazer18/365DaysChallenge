@@ -109,23 +109,24 @@ struct Node {
 
 class Solution{
 private:
-    Node* successor = NULL;
-    void inorder(Node* root, Node* x) {
-        if(!root) return;
+    Node* inorder(Node* root, Node* x, Node* successor) {
+        if(!root) return successor;
         
         if(x->data >= root->data){
-            inorder(root->right, x);
+            return inorder(root->right, x, successor);
         }
         if(x->data < root->data) {
             successor = root;
-            inorder(root->left, x);
+            return inorder(root->left, x, successor);
         }
+        
+        return successor;
     }
 public:
     Node * inOrderSuccessor(Node *root, Node *x) {
-        inorder(root, x);
+        Node* successor = NULL;
         
-        return successor;
+        return inorder(root, x, successor);
     }
 };
 
